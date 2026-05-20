@@ -144,6 +144,15 @@
   background: radial-gradient(ellipse at 50% 70%, rgba(232,156,63,0.5) 0%, transparent 60%);
 }
 
+/* Brand-consistent abstract illustration layer (SVG) */
+.project-illu { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.project-illu .pipe-dot-halo { fill: rgba(242,198,138,0.55); }
+.project-illu .pipe-dot { fill: #F2C68A; }
+.project-illu .heat-line { fill: none; stroke: rgba(255,235,200,0.55); stroke-width: 2; stroke-linecap: round; }
+.project-illu .heat-line.faint { stroke: rgba(255,235,200,0.3); }
+.project-illu .floor-cut { stroke: rgba(244,236,224,0.5); stroke-width: 2; stroke-dasharray: 6 5; }
+.project:hover .project-illu .rise { animation-play-state: running; }
+
 @media (max-width: 968px) {
   .project, .project.large, .project.small, .project.full { grid-column: span 12; }
   .filters { margin: 24px 0 40px; }
@@ -190,8 +199,14 @@
 
       <div class="project large reveal" data-cat="renovatie watergedragen">
         <div class="project-image bg-warm-room">
-          <div class="warm-glow"></div>
-          <div class="floor-grid"></div>
+          <svg class="project-illu" viewBox="0 0 430 300" preserveAspectRatio="xMidYMid slice">
+      <g class="heat-line">
+        <path d="M0,120 Q107,98 215,120 T430,120"/>
+        <path class="faint" d="M0,95 Q107,75 215,95 T430,95"/>
+      </g>
+      <line class="floor-cut" x1="0" y1="160" x2="430" y2="160"/>
+      <line class="heat-line faint" x1="40" y1="160" x2="40" y2="220"/><circle class="pipe-dot-halo" cx="40" cy="160" r="9"/><circle class="pipe-dot" cx="40" cy="160" r="2.5"/><line class="heat-line faint" x1="92" y1="160" x2="92" y2="220"/><circle class="pipe-dot-halo" cx="92" cy="160" r="9"/><circle class="pipe-dot" cx="92" cy="160" r="2.5"/><line class="heat-line faint" x1="144" y1="160" x2="144" y2="220"/><circle class="pipe-dot-halo" cx="144" cy="160" r="9"/><circle class="pipe-dot" cx="144" cy="160" r="2.5"/><line class="heat-line faint" x1="196" y1="160" x2="196" y2="220"/><circle class="pipe-dot-halo" cx="196" cy="160" r="9"/><circle class="pipe-dot" cx="196" cy="160" r="2.5"/><line class="heat-line faint" x1="248" y1="160" x2="248" y2="220"/><circle class="pipe-dot-halo" cx="248" cy="160" r="9"/><circle class="pipe-dot" cx="248" cy="160" r="2.5"/><line class="heat-line faint" x1="300" y1="160" x2="300" y2="220"/><circle class="pipe-dot-halo" cx="300" cy="160" r="9"/><circle class="pipe-dot" cx="300" cy="160" r="2.5"/><line class="heat-line faint" x1="352" y1="160" x2="352" y2="220"/><circle class="pipe-dot-halo" cx="352" cy="160" r="9"/><circle class="pipe-dot" cx="352" cy="160" r="2.5"/><circle class="pipe-dot" cx="92" cy="160" r="1.7"><animate attributeName="cy" values="160;40" dur="6s" begin="0.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="6s" begin="0.2s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="196" cy="160" r="2"><animate attributeName="cy" values="160;40" dur="7s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="7s" begin="1s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="300" cy="160" r="1.5"><animate attributeName="cy" values="160;40" dur="5.5s" begin="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="5.5s" begin="1.8s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="352" cy="160" r="1.4"><animate attributeName="cy" values="160;40" dur="7.5s" begin="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="7.5s" begin="2.5s" repeatCount="indefinite"/></circle>
+    </svg>
           <span class="project-tag">Renovatie</span>
           <div class="project-stat"><strong>118 m²</strong>Watergedragen, gefreesd</div>
         </div>
@@ -202,8 +217,11 @@
 
       <div class="project small reveal" data-cat="renovatie elektrisch">
         <div class="project-image bg-light-room">
-          <div class="warm-glow"></div>
-          <div class="floor-grid"></div>
+          <svg class="project-illu" viewBox="0 0 430 300" preserveAspectRatio="xMidYMid slice">
+      <path class="heat-line" d="M25,178 L25,130 L55,130 L55,178 L85,178 L85,130 L115,130 L115,178 L145,178 L145,130 L175,130 L175,178 L205,178 L205,130 L235,130 L235,178 L265,178 L265,130 L295,130 L295,178 L325,178 L325,130 L355,130 L355,178 L385,178 L385,130 L415,130"/>
+      <line class="floor-cut" x1="0" y1="200" x2="430" y2="200"/>
+      <circle class="pipe-dot" cx="90" cy="150" r="1.6"><animate attributeName="cy" values="150;35" dur="6.5s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="6.5s" begin="0.4s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="200" cy="150" r="1.8"><animate attributeName="cy" values="150;35" dur="7s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="7s" begin="1.2s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="300" cy="150" r="1.5"><animate attributeName="cy" values="150;35" dur="6s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="6s" begin="2s" repeatCount="indefinite"/></circle>
+    </svg>
           <span class="project-tag">Elektrisch</span>
           <div class="project-stat"><strong>14 m²</strong>Badkamer</div>
         </div>
@@ -214,8 +232,15 @@
 
       <div class="project small reveal" data-cat="nieuwbouw watergedragen">
         <div class="project-image bg-cool-room">
-          <div class="warm-glow"></div>
-          <div class="floor-grid"></div>
+          <svg class="project-illu" viewBox="0 0 430 300" preserveAspectRatio="xMidYMid slice">
+      <g class="heat-line">
+        <path d="M0,115 Q107,90 215,115 T430,115"/>
+        <path class="faint" d="M0,90 Q107,68 215,90 T430,90"/>
+        <path class="faint" d="M0,65 Q107,46 215,65 T430,65"/>
+      </g>
+      <line class="floor-cut" x1="0" y1="150" x2="430" y2="150"/>
+      <circle class="pipe-dot-halo" cx="30" cy="150" r="11"/><circle class="pipe-dot" cx="30" cy="150" r="3"/><circle class="pipe-dot-halo" cx="71" cy="150" r="11"/><circle class="pipe-dot" cx="71" cy="150" r="3"/><circle class="pipe-dot-halo" cx="112" cy="150" r="11"/><circle class="pipe-dot" cx="112" cy="150" r="3"/><circle class="pipe-dot-halo" cx="153" cy="150" r="11"/><circle class="pipe-dot" cx="153" cy="150" r="3"/><circle class="pipe-dot-halo" cx="194" cy="150" r="11"/><circle class="pipe-dot" cx="194" cy="150" r="3"/><circle class="pipe-dot-halo" cx="235" cy="150" r="11"/><circle class="pipe-dot" cx="235" cy="150" r="3"/><circle class="pipe-dot-halo" cx="276" cy="150" r="11"/><circle class="pipe-dot" cx="276" cy="150" r="3"/><circle class="pipe-dot-halo" cx="317" cy="150" r="11"/><circle class="pipe-dot" cx="317" cy="150" r="3"/><circle class="pipe-dot-halo" cx="358" cy="150" r="11"/><circle class="pipe-dot" cx="358" cy="150" r="3"/><circle class="pipe-dot-halo" cx="399" cy="150" r="11"/><circle class="pipe-dot" cx="399" cy="150" r="3"/><circle class="pipe-dot" cx="70" cy="150" r="1.8"><animate attributeName="cy" values="150;30" dur="6s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="6s" begin="0s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="150" cy="150" r="2"><animate attributeName="cy" values="150;30" dur="7s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="7s" begin="1s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="230" cy="150" r="1.5"><animate attributeName="cy" values="150;30" dur="5.5s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="5.5s" begin="2s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="310" cy="150" r="1.8"><animate attributeName="cy" values="150;30" dur="6.5s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="6.5s" begin="0.5s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="370" cy="150" r="1.3"><animate attributeName="cy" values="150;30" dur="8s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="8s" begin="1.5s" repeatCount="indefinite"/></circle>
+    </svg>
           <span class="project-tag">Nieuwbouw</span>
           <div class="project-stat"><strong>165 m²</strong>2 verdiepingen</div>
         </div>
@@ -226,8 +251,15 @@
 
       <div class="project large reveal" data-cat="nieuwbouw watergedragen">
         <div class="project-image bg-amber-room">
-          <div class="warm-glow"></div>
-          <div class="floor-grid"></div>
+          <svg class="project-illu" viewBox="0 0 430 300" preserveAspectRatio="xMidYMid slice">
+      <g class="heat-line">
+        <path d="M0,115 Q107,90 215,115 T430,115"/>
+        <path class="faint" d="M0,90 Q107,68 215,90 T430,90"/>
+        <path class="faint" d="M0,65 Q107,46 215,65 T430,65"/>
+      </g>
+      <line class="floor-cut" x1="0" y1="150" x2="430" y2="150"/>
+      <circle class="pipe-dot-halo" cx="30" cy="150" r="11"/><circle class="pipe-dot" cx="30" cy="150" r="3"/><circle class="pipe-dot-halo" cx="71" cy="150" r="11"/><circle class="pipe-dot" cx="71" cy="150" r="3"/><circle class="pipe-dot-halo" cx="112" cy="150" r="11"/><circle class="pipe-dot" cx="112" cy="150" r="3"/><circle class="pipe-dot-halo" cx="153" cy="150" r="11"/><circle class="pipe-dot" cx="153" cy="150" r="3"/><circle class="pipe-dot-halo" cx="194" cy="150" r="11"/><circle class="pipe-dot" cx="194" cy="150" r="3"/><circle class="pipe-dot-halo" cx="235" cy="150" r="11"/><circle class="pipe-dot" cx="235" cy="150" r="3"/><circle class="pipe-dot-halo" cx="276" cy="150" r="11"/><circle class="pipe-dot" cx="276" cy="150" r="3"/><circle class="pipe-dot-halo" cx="317" cy="150" r="11"/><circle class="pipe-dot" cx="317" cy="150" r="3"/><circle class="pipe-dot-halo" cx="358" cy="150" r="11"/><circle class="pipe-dot" cx="358" cy="150" r="3"/><circle class="pipe-dot-halo" cx="399" cy="150" r="11"/><circle class="pipe-dot" cx="399" cy="150" r="3"/><circle class="pipe-dot" cx="70" cy="150" r="1.8"><animate attributeName="cy" values="150;30" dur="6s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="6s" begin="0s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="150" cy="150" r="2"><animate attributeName="cy" values="150;30" dur="7s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="7s" begin="1s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="230" cy="150" r="1.5"><animate attributeName="cy" values="150;30" dur="5.5s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="5.5s" begin="2s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="310" cy="150" r="1.8"><animate attributeName="cy" values="150;30" dur="6.5s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="6.5s" begin="0.5s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="370" cy="150" r="1.3"><animate attributeName="cy" values="150;30" dur="8s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="8s" begin="1.5s" repeatCount="indefinite"/></circle>
+    </svg>
           <span class="project-tag">Nieuwbouw</span>
           <div class="project-stat"><strong>220 m²</strong>Bungalow</div>
         </div>
@@ -238,8 +270,14 @@
 
       <div class="project reveal" data-cat="renovatie watergedragen">
         <div class="project-image bg-deep-room">
-          <div class="warm-glow"></div>
-          <div class="floor-grid"></div>
+          <svg class="project-illu" viewBox="0 0 430 300" preserveAspectRatio="xMidYMid slice">
+      <g class="heat-line">
+        <path d="M0,120 Q107,98 215,120 T430,120"/>
+        <path class="faint" d="M0,95 Q107,75 215,95 T430,95"/>
+      </g>
+      <line class="floor-cut" x1="0" y1="160" x2="430" y2="160"/>
+      <line class="heat-line faint" x1="40" y1="160" x2="40" y2="220"/><circle class="pipe-dot-halo" cx="40" cy="160" r="9"/><circle class="pipe-dot" cx="40" cy="160" r="2.5"/><line class="heat-line faint" x1="92" y1="160" x2="92" y2="220"/><circle class="pipe-dot-halo" cx="92" cy="160" r="9"/><circle class="pipe-dot" cx="92" cy="160" r="2.5"/><line class="heat-line faint" x1="144" y1="160" x2="144" y2="220"/><circle class="pipe-dot-halo" cx="144" cy="160" r="9"/><circle class="pipe-dot" cx="144" cy="160" r="2.5"/><line class="heat-line faint" x1="196" y1="160" x2="196" y2="220"/><circle class="pipe-dot-halo" cx="196" cy="160" r="9"/><circle class="pipe-dot" cx="196" cy="160" r="2.5"/><line class="heat-line faint" x1="248" y1="160" x2="248" y2="220"/><circle class="pipe-dot-halo" cx="248" cy="160" r="9"/><circle class="pipe-dot" cx="248" cy="160" r="2.5"/><line class="heat-line faint" x1="300" y1="160" x2="300" y2="220"/><circle class="pipe-dot-halo" cx="300" cy="160" r="9"/><circle class="pipe-dot" cx="300" cy="160" r="2.5"/><line class="heat-line faint" x1="352" y1="160" x2="352" y2="220"/><circle class="pipe-dot-halo" cx="352" cy="160" r="9"/><circle class="pipe-dot" cx="352" cy="160" r="2.5"/><circle class="pipe-dot" cx="92" cy="160" r="1.7"><animate attributeName="cy" values="160;40" dur="6s" begin="0.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="6s" begin="0.2s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="196" cy="160" r="2"><animate attributeName="cy" values="160;40" dur="7s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="7s" begin="1s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="300" cy="160" r="1.5"><animate attributeName="cy" values="160;40" dur="5.5s" begin="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="5.5s" begin="1.8s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="352" cy="160" r="1.4"><animate attributeName="cy" values="160;40" dur="7.5s" begin="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="7.5s" begin="2.5s" repeatCount="indefinite"/></circle>
+    </svg>
           <span class="project-tag">Renovatie</span>
           <div class="project-stat"><strong>92 m²</strong>Begane grond</div>
         </div>
@@ -250,8 +288,11 @@
 
       <div class="project reveal" data-cat="renovatie elektrisch">
         <div class="project-image bg-night-room">
-          <div class="warm-glow"></div>
-          <div class="floor-grid"></div>
+          <svg class="project-illu" viewBox="0 0 430 300" preserveAspectRatio="xMidYMid slice">
+      <path class="heat-line" d="M25,178 L25,130 L55,130 L55,178 L85,178 L85,130 L115,130 L115,178 L145,178 L145,130 L175,130 L175,178 L205,178 L205,130 L235,130 L235,178 L265,178 L265,130 L295,130 L295,178 L325,178 L325,130 L355,130 L355,178 L385,178 L385,130 L415,130"/>
+      <line class="floor-cut" x1="0" y1="200" x2="430" y2="200"/>
+      <circle class="pipe-dot" cx="90" cy="150" r="1.6"><animate attributeName="cy" values="150;35" dur="6.5s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="6.5s" begin="0.4s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="200" cy="150" r="1.8"><animate attributeName="cy" values="150;35" dur="7s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="7s" begin="1.2s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="300" cy="150" r="1.5"><animate attributeName="cy" values="150;35" dur="6s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="6s" begin="2s" repeatCount="indefinite"/></circle>
+    </svg>
           <span class="project-tag">Elektrisch</span>
           <div class="project-stat"><strong>22 m²</strong>Keuken</div>
         </div>
@@ -262,8 +303,14 @@
 
       <div class="project small reveal" data-cat="renovatie watergedragen">
         <div class="project-image bg-warm-room">
-          <div class="warm-glow"></div>
-          <div class="floor-grid"></div>
+          <svg class="project-illu" viewBox="0 0 430 300" preserveAspectRatio="xMidYMid slice">
+      <g class="heat-line">
+        <path d="M0,120 Q107,98 215,120 T430,120"/>
+        <path class="faint" d="M0,95 Q107,75 215,95 T430,95"/>
+      </g>
+      <line class="floor-cut" x1="0" y1="160" x2="430" y2="160"/>
+      <line class="heat-line faint" x1="40" y1="160" x2="40" y2="220"/><circle class="pipe-dot-halo" cx="40" cy="160" r="9"/><circle class="pipe-dot" cx="40" cy="160" r="2.5"/><line class="heat-line faint" x1="92" y1="160" x2="92" y2="220"/><circle class="pipe-dot-halo" cx="92" cy="160" r="9"/><circle class="pipe-dot" cx="92" cy="160" r="2.5"/><line class="heat-line faint" x1="144" y1="160" x2="144" y2="220"/><circle class="pipe-dot-halo" cx="144" cy="160" r="9"/><circle class="pipe-dot" cx="144" cy="160" r="2.5"/><line class="heat-line faint" x1="196" y1="160" x2="196" y2="220"/><circle class="pipe-dot-halo" cx="196" cy="160" r="9"/><circle class="pipe-dot" cx="196" cy="160" r="2.5"/><line class="heat-line faint" x1="248" y1="160" x2="248" y2="220"/><circle class="pipe-dot-halo" cx="248" cy="160" r="9"/><circle class="pipe-dot" cx="248" cy="160" r="2.5"/><line class="heat-line faint" x1="300" y1="160" x2="300" y2="220"/><circle class="pipe-dot-halo" cx="300" cy="160" r="9"/><circle class="pipe-dot" cx="300" cy="160" r="2.5"/><line class="heat-line faint" x1="352" y1="160" x2="352" y2="220"/><circle class="pipe-dot-halo" cx="352" cy="160" r="9"/><circle class="pipe-dot" cx="352" cy="160" r="2.5"/><circle class="pipe-dot" cx="92" cy="160" r="1.7"><animate attributeName="cy" values="160;40" dur="6s" begin="0.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="6s" begin="0.2s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="196" cy="160" r="2"><animate attributeName="cy" values="160;40" dur="7s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="7s" begin="1s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="300" cy="160" r="1.5"><animate attributeName="cy" values="160;40" dur="5.5s" begin="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="5.5s" begin="1.8s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="352" cy="160" r="1.4"><animate attributeName="cy" values="160;40" dur="7.5s" begin="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="7.5s" begin="2.5s" repeatCount="indefinite"/></circle>
+    </svg>
           <span class="project-tag">Renovatie</span>
           <div class="project-stat"><strong>74 m²</strong>Frezen</div>
         </div>
@@ -274,8 +321,15 @@
 
       <div class="project small reveal" data-cat="nieuwbouw watergedragen">
         <div class="project-image bg-light-room">
-          <div class="warm-glow"></div>
-          <div class="floor-grid"></div>
+          <svg class="project-illu" viewBox="0 0 430 300" preserveAspectRatio="xMidYMid slice">
+      <g class="heat-line">
+        <path d="M0,115 Q107,90 215,115 T430,115"/>
+        <path class="faint" d="M0,90 Q107,68 215,90 T430,90"/>
+        <path class="faint" d="M0,65 Q107,46 215,65 T430,65"/>
+      </g>
+      <line class="floor-cut" x1="0" y1="150" x2="430" y2="150"/>
+      <circle class="pipe-dot-halo" cx="30" cy="150" r="11"/><circle class="pipe-dot" cx="30" cy="150" r="3"/><circle class="pipe-dot-halo" cx="71" cy="150" r="11"/><circle class="pipe-dot" cx="71" cy="150" r="3"/><circle class="pipe-dot-halo" cx="112" cy="150" r="11"/><circle class="pipe-dot" cx="112" cy="150" r="3"/><circle class="pipe-dot-halo" cx="153" cy="150" r="11"/><circle class="pipe-dot" cx="153" cy="150" r="3"/><circle class="pipe-dot-halo" cx="194" cy="150" r="11"/><circle class="pipe-dot" cx="194" cy="150" r="3"/><circle class="pipe-dot-halo" cx="235" cy="150" r="11"/><circle class="pipe-dot" cx="235" cy="150" r="3"/><circle class="pipe-dot-halo" cx="276" cy="150" r="11"/><circle class="pipe-dot" cx="276" cy="150" r="3"/><circle class="pipe-dot-halo" cx="317" cy="150" r="11"/><circle class="pipe-dot" cx="317" cy="150" r="3"/><circle class="pipe-dot-halo" cx="358" cy="150" r="11"/><circle class="pipe-dot" cx="358" cy="150" r="3"/><circle class="pipe-dot-halo" cx="399" cy="150" r="11"/><circle class="pipe-dot" cx="399" cy="150" r="3"/><circle class="pipe-dot" cx="70" cy="150" r="1.8"><animate attributeName="cy" values="150;30" dur="6s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="6s" begin="0s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="150" cy="150" r="2"><animate attributeName="cy" values="150;30" dur="7s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="7s" begin="1s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="230" cy="150" r="1.5"><animate attributeName="cy" values="150;30" dur="5.5s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="5.5s" begin="2s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="310" cy="150" r="1.8"><animate attributeName="cy" values="150;30" dur="6.5s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="6.5s" begin="0.5s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="370" cy="150" r="1.3"><animate attributeName="cy" values="150;30" dur="8s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="8s" begin="1.5s" repeatCount="indefinite"/></circle>
+    </svg>
           <span class="project-tag">Nieuwbouw</span>
           <div class="project-stat"><strong>148 m²</strong>Hoekwoning</div>
         </div>
@@ -286,8 +340,11 @@
 
       <div class="project small reveal" data-cat="renovatie elektrisch">
         <div class="project-image bg-cool-room">
-          <div class="warm-glow"></div>
-          <div class="floor-grid"></div>
+          <svg class="project-illu" viewBox="0 0 430 300" preserveAspectRatio="xMidYMid slice">
+      <path class="heat-line" d="M25,178 L25,130 L55,130 L55,178 L85,178 L85,130 L115,130 L115,178 L145,178 L145,130 L175,130 L175,178 L205,178 L205,130 L235,130 L235,178 L265,178 L265,130 L295,130 L295,178 L325,178 L325,130 L355,130 L355,178 L385,178 L385,130 L415,130"/>
+      <line class="floor-cut" x1="0" y1="200" x2="430" y2="200"/>
+      <circle class="pipe-dot" cx="90" cy="150" r="1.6"><animate attributeName="cy" values="150;35" dur="6.5s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="6.5s" begin="0.4s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="200" cy="150" r="1.8"><animate attributeName="cy" values="150;35" dur="7s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="7s" begin="1.2s" repeatCount="indefinite"/></circle><circle class="pipe-dot" cx="300" cy="150" r="1.5"><animate attributeName="cy" values="150;35" dur="6s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="6s" begin="2s" repeatCount="indefinite"/></circle>
+    </svg>
           <span class="project-tag">Elektrisch</span>
           <div class="project-stat"><strong>9 m²</strong>Toilet + hal</div>
         </div>
