@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mijnwarmevloer.nl — Warmte van onder je voeten</title>
+<meta name="description" content="Vakkundige aanleg van vloerverwarming voor renovatie en nieuwbouw. Eerlijk advies, frees- en infreestechniek, 10 jaar garantie. Door heel Nederland.">
+<!-- ============ SEO & SOCIAL ============ -->
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mijnwarmevloer.nl/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="mijnwarmevloer.nl">
+<meta property="og:url" content="https://mijnwarmevloer.nl/">
+<meta property="og:title" content="mijnwarmevloer.nl — Warmte van onder je voeten">
+<meta property="og:description" content="Vakkundige aanleg van vloerverwarming voor renovatie en nieuwbouw. Eerlijk advies, frees- en infreestechniek, 10 jaar garantie. Door heel Nederland.">
+<meta property="og:image" content="https://mijnwarmevloer.nl/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="mijnwarmevloer.nl — vloerverwarming op maat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="mijnwarmevloer.nl — Warmte van onder je voeten">
+<meta name="twitter:description" content="Vakkundige aanleg van vloerverwarming voor renovatie en nieuwbouw. Eerlijk advies, frees- en infreestechniek, 10 jaar garantie. Door heel Nederland.">
+<meta name="twitter:image" content="https://mijnwarmevloer.nl/og-image.jpg">
+
+<!-- ============ ANALYTICS (kies er een en haal de comment-haakjes weg) ============ -->
+<!--
+  Plausible (privacy-friendly, ~€9/mnd, geen cookiebanner nodig)
+  Aanmelden op https://plausible.io en YOUR-DOMAIN.NL hieronder vervangen.
+-->
+<!-- <script defer data-domain="YOUR-DOMAIN.NL" src="https://plausible.io/js/script.js"></script> -->
+
+<!--
+  Google Analytics 4 (gratis, in NL/EU heb je een cookiebanner nodig)
+  Maak een property aan op https://analytics.google.com en vervang G-XXXXXXXXXX.
+-->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+<!-- ============ END SEO & SOCIAL ============ -->
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js-enabled");</script>
+<link rel="stylesheet" href="style.css">
+<style>
+/* Page-specific */
+.hero { padding: 180px 0 120px; position: relative; overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: center; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13px; text-transform: uppercase; letter-spacing: 0.18em;
+  color: var(--terracotta); margin-bottom: 32px; font-weight: 500;
+}
+.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--terracotta); }
+.hero h1 { margin-bottom: 32px; }
+.hero p.lead { font-size: 19px; color: var(--ink-soft); max-width: 520px; margin-bottom: 40px; line-height: 1.6; }
+.hero-buttons { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.hero-visual {
+  position: relative; aspect-ratio: 4/5;
+  background: linear-gradient(160deg, #E89C3F 0%, #C2562E 60%, #8E3A1C 100%);
+  border-radius: 12px; overflow: hidden;
+  box-shadow: 0 40px 80px -20px rgba(142, 58, 28, 0.4);
+}
+.heat-waves { position: absolute; inset: 0; opacity: 0.55; }
+.heat-glows { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.hero-floor { z-index: 0; }
+.floor-pattern { z-index: 0; }
+.hero-floor {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+  background: linear-gradient(to top, #2A1810 0%, transparent 100%);
+}
+.floor-pattern {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0, transparent 60px, rgba(244,236,224,0.08) 60px, rgba(244,236,224,0.08) 61px),
+    repeating-linear-gradient(0deg, transparent 0, transparent 80px, rgba(244,236,224,0.06) 80px, rgba(244,236,224,0.06) 81px);
+}
+.hero-badge {
+  position: absolute; top: 24px; right: 24px;
+  background: var(--cream); color: var(--ink);
+  padding: 14px 20px; border-radius: 8px; font-size: 13px; font-weight: 500;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.2);
+}
+.hero-badge strong { color: var(--terracotta); display: block; font-family: 'Fraunces', serif; font-size: 22px; font-style: italic; }
+.floating-orb {
+  position: absolute; bottom: 80px; left: 32px;
+  width: 100px; height: 100px;
+  background: radial-gradient(circle, rgba(255,220,160,0.9) 0%, transparent 70%);
+  filter: blur(10px); animation: orb 6s ease-in-out infinite;
+}
+@keyframes orb {
+  0%, 100% { transform: translate(0,0); opacity: 0.6; }
+  50% { transform: translate(20px, -30px); opacity: 0.9; }
+}
+
+.stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 80px; padding-top: 48px; border-top: 1px solid var(--line); }
+.stat { padding: 0 24px; border-left: 1px solid var(--line); }
+.stat:first-child { border-left: none; padding-left: 0; }
+.stat-number { font-family: 'Fraunces', serif; font-size: 44px; font-weight: 400; letter-spacing: -0.03em; line-height: 1; }
+.stat-label { font-size: 13px; color: var(--ink-soft); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+.waarom { background: var(--cream-deep); }
+.waarom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 64px; }
+.feature { padding-top: 32px; border-top: 1px solid var(--ink); }
+.feature-num { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--terracotta); margin-bottom: 24px; }
+.feature h3 { font-size: 28px; line-height: 1.15; margin-bottom: 16px; }
+.feature p { color: var(--ink-soft); font-size: 16px; }
+
+.diensten-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 64px; }
+.diensten-header p { color: var(--ink-soft); font-size: 18px; max-width: 480px; }
+.dienst-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.dienst-card {
+  background: var(--ink); color: var(--cream);
+  border-radius: 16px; padding: 48px;
+  position: relative; overflow: hidden;
+  min-height: 480px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: transform .3s;
+}
+.dienst-card:nth-child(2) { background: var(--terracotta); }
+.dienst-card:hover { transform: translateY(-6px); }
+.dienst-icon { width: 60px; height: 60px; }
+.dienst-card h3 { font-size: 40px; line-height: 1.05; margin: 32px 0 20px; }
+.dienst-card p { font-size: 16px; opacity: 0.85; margin-bottom: 32px; }
+.dienst-card ul { list-style: none; }
+.dienst-card li {
+  padding: 12px 0;
+  border-top: 1px solid rgba(244,236,224,0.15);
+  font-size: 15px; display: flex; justify-content: space-between;
+}
+.dienst-card li:last-child { border-bottom: 1px solid rgba(244,236,224,0.15); }
+.dienst-card li span { opacity: 0.6; }
+
+.werkwijze { background: var(--ink); color: var(--cream); }
+.werkwijze h2 { color: var(--cream); }
+.werkwijze .section-eyebrow { color: var(--amber-soft); }
+.werkwijze .section-eyebrow::before { background: var(--amber-soft); }
+.steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; }
+.step { padding: 32px 24px 32px 0; border-top: 1px solid rgba(244,236,224,0.2); }
+.step-num { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 300; font-style: italic; color: var(--amber-soft); line-height: 1; margin-bottom: 24px; }
+.step h4 { font-size: 22px; margin-bottom: 12px; }
+.step p { font-size: 14px; opacity: 0.7; line-height: 1.55; }
+
+.testimonial { padding: 160px 0; text-align: center; }
+.quote-mark { font-family: 'Fraunces', serif; font-size: 120px; color: var(--terracotta); line-height: 1; opacity: 0.3; margin-bottom: -20px; }
+.testimonial blockquote {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300; line-height: 1.25; letter-spacing: -0.015em;
+  max-width: 900px; margin: 0 auto 40px;
+}
+.testimonial blockquote em { color: var(--terracotta); font-weight: 400; }
+.testimonial-author { font-size: 14px; color: var(--ink-soft); letter-spacing: 0.1em; text-transform: uppercase; }
+
+.cta-section {
+  background: var(--terracotta); color: var(--cream);
+  border-radius: 24px; padding: 96px 64px; text-align: center;
+  margin: 80px auto 120px; max-width: 1280px;
+  position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: ''; position: absolute; top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(232,156,63,0.4) 0%, transparent 70%);
+}
+.cta-section::after {
+  content: ''; position: absolute; bottom: -150px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(142,58,28,0.6) 0%, transparent 70%);
+}
+.cta-section > * { position: relative; z-index: 1; }
+.cta-section h2 { color: var(--cream); margin: 0 auto 24px; }
+.cta-section h2 em { color: var(--amber-soft); }
+.cta-section p { font-size: 19px; opacity: 0.9; max-width: 540px; margin: 0 auto 40px; }
+.cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.cta-section .btn-primary { background: var(--cream); color: var(--ink); }
+.cta-section .btn-primary:hover { background: var(--ink); color: var(--cream); }
+.cta-section .btn-secondary { color: var(--cream); border-color: var(--cream); }
+.cta-section .btn-secondary:hover { color: var(--amber-soft); border-color: var(--amber-soft); }
+
+@media (max-width: 968px) {
+  .hero { padding: 140px 0 80px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+  .hero-visual { aspect-ratio: 5/4; max-width: 500px; }
+  .stats-strip { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .stat { border-left: none; padding: 0; }
+  .waarom-grid, .dienst-grid, .diensten-header { grid-template-columns: 1fr; gap: 32px; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .cta-section { padding: 64px 32px; margin: 60px 16px 80px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-icon-ink.svg" alt="">
+      <span class="wordmark">mijnwarmevloer<span class="tld">.nl</span></span>
+    </a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="projecten.html">Projecten</a></li>
+      <li><a href="faq.html">Veelgestelde vragen</a></li>
+      <li><a href="contact.html" class="nav-cta">Offerte aanvragen</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="hero-eyebrow">Vloerverwarming op maat</div>
+        <h1>Warmte die <em>opstijgt</em> —<br>precies waar je 'm legt.</h1>
+        <p class="lead">Eerlijk advies, vakkundige aanleg en stevige ervaring met zowel elektrische als watergedragen vloerverwarming. Van renovatie tot nieuwbouw — wij maken elke vloer warm.</p>
+        <div class="hero-buttons">
+          <a href="contact.html" class="btn-primary">
+            Bereken jouw vloer
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#werkwijze" class="btn-secondary">Bekijk de werkwijze</a>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <svg class="heat-waves" viewBox="0 0 400 500" preserveAspectRatio="none">
+          <g stroke="rgba(255,235,200,0.9)" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <path d="M0,360 Q100,335 200,360 T400,360">
+              <animate attributeName="d" values="M0,360 Q100,335 200,360 T400,360;M0,360 Q100,380 200,360 T400,360;M0,360 Q100,335 200,360 T400,360" dur="7s" repeatCount="indefinite"/>
+            </path>
+            <path d="M0,310 Q100,280 200,310 T400,310">
+              <animate attributeName="d" values="M0,310 Q100,280 200,310 T400,310;M0,310 Q100,335 200,310 T400,310;M0,310 Q100,280 200,310 T400,310" dur="6s" repeatCount="indefinite"/>
+            </path>
+            <path d="M0,260 Q100,225 200,260 T400,260">
+              <animate attributeName="d" values="M0,260 Q100,225 200,260 T400,260;M0,260 Q100,290 200,260 T400,260;M0,260 Q100,225 200,260 T400,260" dur="6.5s" repeatCount="indefinite"/>
+            </path>
+            <path d="M0,210 Q100,180 200,210 T400,210" opacity="0.8">
+              <animate attributeName="d" values="M0,210 Q100,180 200,210 T400,210;M0,210 Q100,235 200,210 T400,210;M0,210 Q100,180 200,210 T400,210" dur="7.5s" repeatCount="indefinite"/>
+            </path>
+            <path d="M0,160 Q100,135 200,160 T400,160" opacity="0.6"/>
+            <path d="M0,110 Q100,90 200,110 T400,110" opacity="0.4"/>
+            <path d="M0,60 Q100,45 200,60 T400,60" opacity="0.25"/>
+          </g>
+        </svg>
+        <svg class="heat-glows" viewBox="0 0 400 500" preserveAspectRatio="none">
+          <defs>
+            <radialGradient id="pipeGlow">
+              <stop offset="0%" stop-color="#F2C68A" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#F2C68A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- Pipe dots along floor line: bright center + soft halo -->
+          <g>
+            <circle cx="40" cy="400" r="9" fill="url(#pipeGlow)"/>
+            <circle cx="80" cy="400" r="9" fill="url(#pipeGlow)"/>
+            <circle cx="120" cy="400" r="9" fill="url(#pipeGlow)"/>
+            <circle cx="160" cy="400" r="9" fill="url(#pipeGlow)"/>
+            <circle cx="200" cy="400" r="9" fill="url(#pipeGlow)"/>
+            <circle cx="240" cy="400" r="9" fill="url(#pipeGlow)"/>
+            <circle cx="280" cy="400" r="9" fill="url(#pipeGlow)"/>
+            <circle cx="320" cy="400" r="9" fill="url(#pipeGlow)"/>
+            <circle cx="360" cy="400" r="9" fill="url(#pipeGlow)"/>
+            <circle cx="40" cy="400" r="2.5" fill="#F2C68A"/>
+            <circle cx="80" cy="400" r="2.5" fill="#F2C68A"/>
+            <circle cx="120" cy="400" r="2.5" fill="#F2C68A"/>
+            <circle cx="160" cy="400" r="2.5" fill="#F2C68A"/>
+            <circle cx="200" cy="400" r="2.5" fill="#F2C68A"/>
+            <circle cx="240" cy="400" r="2.5" fill="#F2C68A"/>
+            <circle cx="280" cy="400" r="2.5" fill="#F2C68A"/>
+            <circle cx="320" cy="400" r="2.5" fill="#F2C68A"/>
+            <circle cx="360" cy="400" r="2.5" fill="#F2C68A"/>
+          </g>
+          <!-- Rising heat particles -->
+          <g fill="#F4ECE0">
+            <circle cx="80" r="1.8"><animate attributeName="cy" values="400;100" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.9;0" dur="6s" repeatCount="indefinite"/></circle>
+            <circle cx="160" r="2"><animate attributeName="cy" values="400;80" dur="7s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="7s" begin="1s" repeatCount="indefinite"/></circle>
+            <circle cx="240" r="1.5"><animate attributeName="cy" values="400;120" dur="5.5s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="5.5s" begin="2s" repeatCount="indefinite"/></circle>
+            <circle cx="320" r="1.8"><animate attributeName="cy" values="400;90" dur="6.5s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.9;0" dur="6.5s" begin="0.5s" repeatCount="indefinite"/></circle>
+            <circle cx="120" r="1.3"><animate attributeName="cy" values="400;130" dur="8s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="8s" begin="1.5s" repeatCount="indefinite"/></circle>
+            <circle cx="280" r="1.5"><animate attributeName="cy" values="400;110" dur="7.5s" begin="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="7.5s" begin="2.5s" repeatCount="indefinite"/></circle>
+            <circle cx="200" r="1.8"><animate attributeName="cy" values="400;60" dur="9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" dur="9s" repeatCount="indefinite"/></circle>
+            <circle cx="365" r="1.2"><animate attributeName="cy" values="400;150" dur="7.2s" begin="3.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.7;0" dur="7.2s" begin="3.5s" repeatCount="indefinite"/></circle>
+            <circle cx="55" r="1.5"><animate attributeName="cy" values="400;160" dur="5.8s" begin="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.6;0" dur="5.8s" begin="3s" repeatCount="indefinite"/></circle>
+          </g>
+        </svg>
+        <div class="floating-orb"></div>
+        <div class="hero-floor"></div>
+        <div class="floor-pattern"></div>
+        <div class="hero-badge">
+          Tot <strong>20%</strong>
+          minder stookkosten
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-strip reveal">
+      <div class="stat"><div class="stat-number">5+</div><div class="stat-label">Jaar ervaring</div></div>
+      <div class="stat"><div class="stat-number">35</div><div class="stat-label">Projecten</div></div>
+      <div class="stat"><div class="stat-number">9,4</div><div class="stat-label">Klantbeoordeling</div></div>
+      <div class="stat"><div class="stat-number">10 jr</div><div class="stat-label">Garantie</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ WAAROM ============ -->
+<section class="waarom">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Waarom mijnwarmevloer.nl</div>
+      <h2>Vakmanschap waar je <em>op staat</em>.</h2>
+    </div>
+    <div class="waarom-grid">
+      <div class="feature reveal">
+        <div class="feature-num">— 01</div>
+        <h3>Eerlijk advies vooraf</h3>
+        <p>We meten je woning, berekenen de warmtevraag en geven een transparant kostenplaatje. Geen verrassingen, geen verkooppraat.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feature-num">— 02</div>
+        <h3>Frees- en infreestechniek</h3>
+        <p>Bestaande vloer? Met onze freestechniek leggen we de leidingen aan zónder de hele vloer eruit te slopen. Schoon en snel.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feature-num">— 03</div>
+        <h3>10 jaar garantie</h3>
+        <p>Op systemen én op het werk en directe ondersteuning bij vragen of storingen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIENSTEN ============ -->
+<section id="diensten">
+  <div class="container">
+    <div class="diensten-header">
+      <div class="reveal">
+        <div class="section-eyebrow">Onze diensten</div>
+        <h2>Twee systemen, één <em>doel</em>.</h2>
+      </div>
+      <p class="reveal">Of je nu een hele woning wilt voorzien van watergedragen vloerverwarming, of in één ruimte snel elektrische warmte wilt — we hebben de techniek én de mensen ervoor.</p>
+    </div>
+
+    <div class="dienst-grid">
+      <div class="dienst-card reveal">
+        <div>
+          <svg class="dienst-icon" viewBox="0 0 60 60" fill="none">
+            <circle cx="30" cy="30" r="28" stroke="var(--amber-soft)" stroke-width="1.5"/>
+            <path d="M20 35 Q25 30, 30 35 T40 35" stroke="var(--amber-soft)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M20 28 Q25 23, 30 28 T40 28" stroke="var(--amber-soft)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+            <path d="M20 21 Q25 16, 30 21 T40 21" stroke="var(--amber-soft)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.3"/>
+          </svg>
+          <h3>Watergedragen<br>vloerverwarming</h3>
+          <p>Het zuinigste systeem voor je hele woning. Ideaal in combinatie met een (hybride) warmtepomp of HR-ketel.</p>
+        </div>
+        <ul>
+          <li>Volledige aanleg (nat systeem) <span>€30 — €50 /m²</span></li>
+          <li>Droogbouw (voor renovatie) <span>€35 — €65 /m²</span></li>
+          <li>Infrezen in bestaande vloer <span>€30 — €45 /m²</span></li>
+          <li>Aansluiting op warmtepomp <span>op maat</span></li>
+        </ul>
+      </div>
+
+      <div class="dienst-card reveal">
+        <div>
+          <svg class="dienst-icon" viewBox="0 0 60 60" fill="none">
+            <rect x="6" y="6" width="48" height="48" rx="6" stroke="var(--cream)" stroke-width="1.5"/>
+            <path d="M14 22 L46 22 M14 30 L46 30 M14 38 L46 38" stroke="var(--cream)" stroke-width="1.5"/>
+            <circle cx="30" cy="14" r="2" fill="var(--cream)"/>
+          </svg>
+          <h3>Elektrische<br>vloerverwarming</h3>
+          <p>Snel, dun en perfect voor badkamers, keukens of bij-aanbouw. Op laag voltage en eenvoudig per kamer regelbaar.</p>
+        </div>
+        <ul>
+          <li>Vloerverwarmingsmatten onder tegels <span>€60 — €70 /m²</span></li>
+          <li>Foliesysteem (infrarood, onder laminaat) <span>€50 — €75 /m²</span></li>
+          <li>Slimme thermostaat <span>incl.</span></li>
+        </ul>
+      </div>
+    
+        <p class="diensten-disclaimer" style="grid-column: 1 / -1; text-align: center; font-size: 14px; color: var(--ink-soft); margin: 40px auto 0; max-width: 640px; font-style: italic;">
+          Richtprijzen incl. btw, incl. aanleg en materiaal. Definitieve prijs hangt af van je situatie — vraag een vrijblijvende offerte aan voor jouw woning.
+        </p>
+        <div class="meerprijs-box" style="grid-column: 1 / -1; max-width: 640px; margin: 24px auto 0; padding: 20px 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--cream-deep);">
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--terracotta); font-weight: 500; margin-bottom: 10px;">Let op — bij infrezen</div>
+          <p style="font-size: 14px; color: var(--ink-soft); margin: 0 0 14px; line-height: 1.6;">Sleuven dichtsmeren en egaliseren is <strong style="color: var(--ink); font-weight: 500;">niet inbegrepen</strong> in de richtprijs. Meerprijs per m² (incl. btw):</p>
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            <tr style="border-bottom: 1px solid var(--line);">
+              <td style="padding: 8px 0; color: var(--ink-soft);">Laagdikte tot 1 mm</td>
+              <td style="text-align: right; padding: 8px 0; font-family: 'Fraunces', serif; font-style: italic; color: var(--terracotta); font-size: 16px;">€4 /m²</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--line);">
+              <td style="padding: 8px 0; color: var(--ink-soft);">Laagdikte tot 2 mm</td>
+              <td style="text-align: right; padding: 8px 0; font-family: 'Fraunces', serif; font-style: italic; color: var(--terracotta); font-size: 16px;">€7 /m²</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: var(--ink-soft);">Meer dan 2 mm</td>
+              <td style="text-align: right; padding: 8px 0; font-family: 'Fraunces', serif; font-style: italic; color: var(--terracotta); font-size: 16px;">€14 /m²</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+  </div>
+</section>
+
+<!-- ============ WERKWIJZE ============ -->
+<section id="werkwijze" class="werkwijze">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Werkwijze</div>
+      <h2>Van eerste gesprek tot <em>warme vloer</em> — in vier stappen.</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal"><div class="step-num">01</div><h4>Kennismaking</h4><p>Een telefoongesprek of bezoek aan huis. We bespreken je woning, wensen en het bestaande systeem.</p></div>
+      <div class="step reveal"><div class="step-num">02</div><h4>Berekening &amp; offerte</h4><p>Een transparant ontwerp qua materialen en heldere prijsopgave. Binnen twee werkdagen.</p></div>
+      <div class="step reveal"><div class="step-num">03</div><h4>Aanleg</h4><p>Onze eigen monteurs leggen het systeem aan. Geen onderaannemers, één vast aanspreekpunt.</p></div>
+      <div class="step reveal"><div class="step-num">04</div><h4>Inregelen &amp; oplevering</h4><p>Volledig inregelen, instructie van de thermostaat en een schriftelijke garantie. Klaar om te genieten.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIAL ============ -->
+<section class="testimonial">
+  <div class="container">
+    <div class="reveal">
+      <div class="quote-mark">"</div>
+      <blockquote>We hebben de hele benedenverdieping laten frezen. <em>Geen sloop, geen rotzooi</em>, en binnen 1 dag klaar. De vloer is heerlijk warm, zelfs op een zachte stand.</blockquote>
+      <div class="testimonial-author">— Familie Hendriks · Renovatie · Almere</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section style="padding: 0;">
+  <div class="cta-section reveal">
+    <div class="section-eyebrow" style="color: var(--amber-soft); justify-content: center; display: inline-flex;">
+      <span style="background: var(--amber-soft); width: 28px; height: 1px;"></span>
+      Vandaag aanvragen, deze week reactie
+    </div>
+    <h2 style="margin: 0 auto 24px;">Klaar voor een <em>warme vloer</em>?</h2>
+    <p>Vraag een gratis berekening aan op basis van je plattegrond waar de vloerverwarming moet komen en soort vloer er nu ligt. Beton of hout bijvoorbeeld. Binnen 2 werkdagen ontvang je een eerlijke offerte met heldere prijs.</p>
+    <div class="cta-buttons">
+      <a href="contact.html" class="btn-primary">
+        Offerte aanvragen
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="tel:+31646150160" class="btn-secondary">Of bel 06-46150160</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="logo-icon-terracotta.svg" alt="">
+          <span class="wordmark">mijnwarmevloer<span class="tld">.nl</span></span>
+        </a>
+        <p class="footer-tagline">Vakkundige aanleg van vloerverwarming voor renovatie en nieuwbouw. Door heel Nederland.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Diensten</h5>
+        <ul>
+          <li><a href="index.html#diensten">Watergedragen</a></li>
+          <li><a href="index.html#diensten">Elektrisch</a></li>
+          <li><a href="index.html#diensten">Frezen</a></li>
+          <li><a href="index.html#diensten">Onderhoud</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Bedrijf</h5>
+        <ul>
+          <li><a href="projecten.html">Projecten</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="index.html#werkwijze">Werkwijze</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+31646150160">06-46150160</a></li>
+          <li><a href="mailto:hallo@mijnwarmevloer.nl">hallo@mijnwarmevloer.nl</a></li>
+          <li><a href="#">Ma–Vr · 08:00 — 18:00</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 mijnwarmevloer.nl — een handelsnaam van Creditline BV · KvK 59683198 · BTW NL853603108B01</div>
+      <div><a href="privacy.html">Privacy</a> · <a href="voorwaarden.html">Algemene voorwaarden</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

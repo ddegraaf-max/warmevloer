@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact &amp; offerte aanvragen — mijnwarmevloer.nl</title>
+<meta name="description" content="Vraag vrijblijvend een offerte aan voor vloerverwarming. Binnen 2 werkdagen reactie. Door heel Nederland.">
+<!-- ============ SEO & SOCIAL ============ -->
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mijnwarmevloer.nl/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="mijnwarmevloer.nl">
+<meta property="og:url" content="https://mijnwarmevloer.nl/contact.html">
+<meta property="og:title" content="Contact & offerte aanvragen — mijnwarmevloer.nl">
+<meta property="og:description" content="Vraag vrijblijvend een offerte aan voor vloerverwarming. Binnen 2 werkdagen reactie. Door heel Nederland.">
+<meta property="og:image" content="https://mijnwarmevloer.nl/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="mijnwarmevloer.nl — vloerverwarming op maat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact & offerte aanvragen — mijnwarmevloer.nl">
+<meta name="twitter:description" content="Vraag vrijblijvend een offerte aan voor vloerverwarming. Binnen 2 werkdagen reactie. Door heel Nederland.">
+<meta name="twitter:image" content="https://mijnwarmevloer.nl/og-image.jpg">
+
+<!-- ============ ANALYTICS (kies er een en haal de comment-haakjes weg) ============ -->
+<!--
+  Plausible (privacy-friendly, ~€9/mnd, geen cookiebanner nodig)
+  Aanmelden op https://plausible.io en YOUR-DOMAIN.NL hieronder vervangen.
+-->
+<!-- <script defer data-domain="YOUR-DOMAIN.NL" src="https://plausible.io/js/script.js"></script> -->
+
+<!--
+  Google Analytics 4 (gratis, in NL/EU heb je een cookiebanner nodig)
+  Maak een property aan op https://analytics.google.com en vervang G-XXXXXXXXXX.
+-->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+<!-- ============ END SEO & SOCIAL ============ -->
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js-enabled");</script>
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: start; padding: 80px 0 160px; }
+.form-block {
+  background: var(--cream-deep);
+  border-radius: 20px;
+  padding: 56px;
+}
+.form-block h2 { font-size: 36px; margin-bottom: 16px; }
+.form-block p.intro { color: var(--ink-soft); margin-bottom: 40px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field.full { grid-column: 1 / -1; }
+label {
+  font-size: 13px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--ink-soft);
+}
+label .req { color: var(--terracotta); }
+input, select, textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--cream);
+  color: var(--ink);
+  transition: border-color .2s, box-shadow .2s;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(194,86,46,0.15);
+}
+textarea { min-height: 140px; resize: vertical; font-family: inherit; }
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231E1612' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  padding-right: 44px;
+}
+.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.option-card {
+  border: 1px solid var(--line); background: var(--cream);
+  padding: 18px; border-radius: 10px;
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; gap: 12px;
+}
+.option-card:hover { border-color: var(--terracotta); }
+.option-card input { display: none; }
+.option-card input:checked + .option-content { color: var(--terracotta); }
+.option-card:has(input:checked) { border-color: var(--terracotta); background: rgba(194,86,46,0.06); }
+.option-content { font-size: 15px; font-weight: 500; }
+.option-content small { display: block; font-weight: 400; color: var(--ink-soft); font-size: 13px; margin-top: 2px; }
+.consent { display: flex; align-items: flex-start; gap: 12px; margin: 28px 0; font-size: 14px; color: var(--ink-soft); }
+.consent input { margin-top: 3px; }
+.submit-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.submit-note { font-size: 13px; color: var(--ink-soft); }
+
+.contact-info { padding: 24px 0; }
+.contact-info h3 { font-size: 28px; margin-bottom: 12px; }
+.contact-info p { color: var(--ink-soft); margin-bottom: 40px; }
+.contact-block {
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+.contact-block:last-child { border-bottom: 1px solid var(--line); }
+.contact-label {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--terracotta); font-weight: 500; margin-bottom: 8px;
+}
+.contact-value { font-family: 'Fraunces', serif; font-size: 22px; font-style: italic; }
+.contact-value a { color: var(--ink); text-decoration: none; }
+.contact-value a:hover { color: var(--terracotta); }
+
+.success-msg {
+  display: none;
+  padding: 24px;
+  background: rgba(194,86,46,0.08);
+  border: 1px solid var(--terracotta);
+  border-radius: 12px;
+  color: var(--terracotta);
+  margin-bottom: 24px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 18px;
+}
+.success-msg.show { display: block; }
+
+@media (max-width: 968px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; padding: 40px 0 80px; }
+  .form-block { padding: 32px; }
+  .form-row, .options-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-icon-ink.svg" alt="">
+      <span class="wordmark">mijnwarmevloer<span class="tld">.nl</span></span>
+    </a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projecten.html">Projecten</a></li>
+      <li><a href="faq.html">Veelgestelde vragen</a></li>
+      <li><a href="contact.html" class="nav-cta">Offerte aanvragen</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container reveal">
+    <div class="breadcrumb">— Contact</div>
+    <h1>Vraag een offerte aan.<br><em>Binnen 2 werkdagen</em> reactie.</h1>
+    <p class="lead">Vul je gegevens in voor een vrijblijvende berekening. Hoe meer je deelt over je woning en wensen, hoe accurater onze offerte.</p>
+  </div>
+</header>
+
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="form-block reveal">
+        <h2>Offerteformulier</h2>
+        <p class="intro">Alles met * is verplicht. We bellen je binnen 2 werkdagen voor een korte intake.</p>
+
+        <div class="success-msg" id="successMsg">
+          Bedankt! We hebben je aanvraag ontvangen en nemen binnen 2 werkdagen contact op.
+        </div>
+
+        <!-- Formulier verstuurt naar onze eigen server (server.js → Resend) -->
+        <form id="offerteForm"
+              action="/api/offerte"
+              method="POST"
+              onsubmit="return handleSubmit(event)">
+          <!-- Anti-spam honeypot: bots vullen dit verborgen veld in -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="form-row">
+            <div class="field">
+              <label for="naam">Naam <span class="req">*</span></label>
+              <input type="text" id="naam" name="naam" required>
+            </div>
+            <div class="field">
+              <label for="telefoon">Telefoon <span class="req">*</span></label>
+              <input type="tel" id="telefoon" name="telefoon" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="email">E-mail <span class="req">*</span></label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="field">
+              <label for="postcode">Postcode</label>
+              <input type="text" id="postcode" name="postcode" placeholder="1234 AB">
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom: 20px;">
+            <label>Soort systeem <span class="req">*</span></label>
+            <div class="options-grid">
+              <label class="option-card">
+                <input type="radio" name="systeem" value="watergedragen" required>
+                <div class="option-content">Watergedragen<small>Voor hele woning</small></div>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="systeem" value="elektrisch">
+                <div class="option-content">Elektrisch<small>Per ruimte</small></div>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="systeem" value="advies">
+                <div class="option-content">Weet ik nog niet<small>Geef me advies</small></div>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="systeem" value="onderhoud">
+                <div class="option-content">Onderhoud<small>Bestaand systeem</small></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="oppervlak">Oppervlak (m²)</label>
+              <input type="number" id="oppervlak" name="oppervlak" min="1" placeholder="bijv. 80">
+            </div>
+            <div class="field">
+              <label for="situatie">Situatie</label>
+              <select id="situatie" name="situatie">
+                <option value="">— Kies een optie —</option>
+                <option>Nieuwbouw</option>
+                <option>Renovatie / bestaande vloer</option>
+                <option>Aanbouw / uitbreiding</option>
+                <option>Verbouwing van één ruimte</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field full" style="margin-bottom: 20px;">
+            <label for="bericht">Aanvullende informatie</label>
+            <textarea id="bericht" name="bericht" placeholder="Bijvoorbeeld: gewenste opleverdatum, type vloer dat erop komt, warmtebron (cv-ketel/warmtepomp)..."></textarea>
+          </div>
+
+          <label class="consent">
+            <input type="checkbox" required>
+            <span>Ik ga akkoord met de <a href="privacy.html" style="color: var(--terracotta);">privacyverklaring</a>. We gebruiken je gegevens alleen om contact op te nemen over deze aanvraag.</span>
+          </label>
+
+          <div class="submit-row">
+            <button type="submit" class="btn-primary">
+              Offerte aanvragen
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="submit-note">Geen verplichtingen · gratis advies</div>
+          </div>
+        </form>
+      </div>
+
+      <aside class="contact-info reveal">
+        <h3>Liever direct contact?</h3>
+        <p>Geen probleem. Bel of mail ons gerust — we helpen graag.</p>
+
+        <div class="contact-block">
+          <div class="contact-label">Telefoon</div>
+          <div class="contact-value"><a href="tel:+31646150160">06-46150160</a></div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-label">E-mail</div>
+          <div class="contact-value"><a href="mailto:hallo@mijnwarmevloer.nl">hallo@mijnwarmevloer.nl</a></div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-label">WhatsApp</div>
+          <div class="contact-value"><a href="https://wa.me/31646150160">06-46150160</a></div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-label">Openingstijden</div>
+          <div class="contact-value" style="font-size: 16px; font-style: normal; line-height: 1.6;">
+            Ma — Vr · 08:00 — 18:00<br>
+            Za · op afspraak<br>
+            Zo · gesloten
+          </div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-label">Bezoekadres</div>
+          <div class="contact-value" style="font-size: 16px; font-style: normal; line-height: 1.6;">
+            Torenlaan 5A<br>
+            1402 AT Bussum<br>
+            Op afspraak
+          </div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-label">Werkgebied</div>
+          <div class="contact-value" style="font-size: 16px; font-style: normal;">
+            Door heel Nederland
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="logo-icon-terracotta.svg" alt="">
+          <span class="wordmark">mijnwarmevloer<span class="tld">.nl</span></span>
+        </a>
+        <p class="footer-tagline">Vakkundige aanleg van vloerverwarming voor renovatie en nieuwbouw. Door heel Nederland.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Diensten</h5>
+        <ul>
+          <li><a href="index.html#diensten">Watergedragen</a></li>
+          <li><a href="index.html#diensten">Elektrisch</a></li>
+          <li><a href="index.html#diensten">Frezen</a></li>
+          <li><a href="index.html#diensten">Onderhoud</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Bedrijf</h5>
+        <ul>
+          <li><a href="projecten.html">Projecten</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="index.html#werkwijze">Werkwijze</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+31646150160">06-46150160</a></li>
+          <li><a href="mailto:hallo@mijnwarmevloer.nl">hallo@mijnwarmevloer.nl</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 mijnwarmevloer.nl — een handelsnaam van Creditline BV · KvK 59683198 · BTW NL853603108B01</div>
+      <div><a href="privacy.html">Privacy</a> · <a href="voorwaarden.html">Algemene voorwaarden</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const msg = document.getElementById('successMsg');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  const originalText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Bezig met verzenden...';
+
+  // Verzamel alle velden als JSON
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  try {
+    const response = await fetch('/api/offerte', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.ok) {
+      msg.classList.add('show');
+      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      form.reset();
+    } else {
+      alert(result.error || 'Er ging iets mis. Bel ons gerust op 06-46150160.');
+    }
+  } catch (err) {
+    alert('Er ging iets mis. Bel ons gerust op 06-46150160.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+  }
+  return false;
+}
+</script>
+</body>
+</html>

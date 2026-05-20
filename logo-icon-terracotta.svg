@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="mijn warme vloer">
+  <rect x="5" y="5" width="190" height="190" rx="42" fill="#C2562E"/>
+  <g fill="none" stroke="#F4ECE0" stroke-width="9" stroke-linecap="round">
+    <path d="M 45 80 Q 75 60, 100 80 T 155 80" opacity="0.45"/>
+    <path d="M 45 110 Q 75 90, 100 110 T 155 110" opacity="0.75"/>
+    <path d="M 45 140 Q 75 120, 100 140 T 155 140"/>
+  </g>
+  <line x1="40" y1="168" x2="160" y2="168" stroke="#F2C68A" stroke-width="10" stroke-linecap="round"/>
+</svg>

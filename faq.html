@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veelgestelde vragen — mijnwarmevloer.nl</title>
+<meta name="description" content="Antwoorden op de meest gestelde vragen over vloerverwarming: kosten, aanleg, onderhoud, warmtepomp, frezen en meer.">
+<!-- ============ SEO & SOCIAL ============ -->
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mijnwarmevloer.nl/faq.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="mijnwarmevloer.nl">
+<meta property="og:url" content="https://mijnwarmevloer.nl/faq.html">
+<meta property="og:title" content="Veelgestelde vragen — mijnwarmevloer.nl">
+<meta property="og:description" content="Antwoorden op de meest gestelde vragen over vloerverwarming: kosten, aanleg, onderhoud, warmtepomp, frezen en meer.">
+<meta property="og:image" content="https://mijnwarmevloer.nl/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="mijnwarmevloer.nl — vloerverwarming op maat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Veelgestelde vragen — mijnwarmevloer.nl">
+<meta name="twitter:description" content="Antwoorden op de meest gestelde vragen over vloerverwarming: kosten, aanleg, onderhoud, warmtepomp, frezen en meer.">
+<meta name="twitter:image" content="https://mijnwarmevloer.nl/og-image.jpg">
+
+<!-- ============ ANALYTICS (kies er een en haal de comment-haakjes weg) ============ -->
+<!--
+  Plausible (privacy-friendly, ~€9/mnd, geen cookiebanner nodig)
+  Aanmelden op https://plausible.io en YOUR-DOMAIN.NL hieronder vervangen.
+-->
+<!-- <script defer data-domain="YOUR-DOMAIN.NL" src="https://plausible.io/js/script.js"></script> -->
+
+<!--
+  Google Analytics 4 (gratis, in NL/EU heb je een cookiebanner nodig)
+  Maak een property aan op https://analytics.google.com en vervang G-XXXXXXXXXX.
+-->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+<!-- ============ END SEO & SOCIAL ============ -->
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js-enabled");</script>
+<link rel="stylesheet" href="style.css">
+<style>
+.faq-layout {
+  display: grid;
+  grid-template-columns: 1fr 2.2fr;
+  gap: 80px;
+  padding: 80px 0 160px;
+  align-items: start;
+}
+
+.faq-sidebar {
+  position: sticky; top: 100px;
+}
+.faq-sidebar h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 22px;
+  margin-bottom: 24px;
+  color: var(--terracotta);
+}
+.faq-nav {
+  list-style: none;
+  padding: 0;
+}
+.faq-nav li { margin-bottom: 4px; }
+.faq-nav a {
+  display: block;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-size: 15px;
+  border-radius: 8px;
+  transition: all .2s;
+}
+.faq-nav a:hover { background: var(--cream-deep); color: var(--ink); }
+.faq-nav a.active { background: var(--ink); color: var(--cream); }
+
+.faq-content { max-width: 800px; }
+.faq-section { margin-bottom: 80px; }
+.faq-section h2 {
+  font-size: 40px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.faq-section h2 em { color: var(--terracotta); }
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+.faq-item summary {
+  padding: 28px 0;
+  cursor: pointer;
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  transition: color .2s;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { color: var(--terracotta); }
+.faq-item summary::after {
+  content: '+';
+  font-family: 'DM Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--terracotta);
+  flex-shrink: 0;
+  transition: transform .3s;
+  line-height: 1;
+}
+.faq-item[open] summary::after { content: '−'; transform: rotate(0); }
+.faq-item[open] summary { color: var(--terracotta); }
+.faq-answer {
+  padding: 0 0 32px 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 680px;
+}
+.faq-answer p { margin-bottom: 12px; }
+.faq-answer p:last-child { margin-bottom: 0; }
+.faq-answer ul { margin: 8px 0 16px 20px; }
+.faq-answer li { margin-bottom: 6px; }
+.faq-answer strong { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 968px) {
+  .faq-layout { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 80px; }
+  .faq-sidebar { position: static; }
+  .faq-section h2 { font-size: 28px; }
+  .faq-item summary { font-size: 18px; padding: 20px 0; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-icon-ink.svg" alt="">
+      <span class="wordmark">mijnwarmevloer<span class="tld">.nl</span></span>
+    </a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projecten.html">Projecten</a></li>
+      <li><a href="faq.html" class="active">Veelgestelde vragen</a></li>
+      <li><a href="contact.html" class="nav-cta">Offerte aanvragen</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container reveal">
+    <div class="breadcrumb">— Veelgestelde vragen</div>
+    <h1>Vragen die we <em>vaak</em> krijgen.</h1>
+    <p class="lead">Antwoorden op de praktische vragen die de meeste klanten stellen — over kosten, aanleg, onderhoud en techniek.</p>
+  </div>
+</header>
+
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="faq-layout">
+
+      <aside class="faq-sidebar reveal">
+        <h3>Categorieën</h3>
+        <ul class="faq-nav">
+          <li><a href="#algemeen" class="active">Algemeen</a></li>
+          <li><a href="#kosten">Kosten &amp; offerte</a></li>
+          <li><a href="#aanleg">Aanleg &amp; frezen</a></li>
+          <li><a href="#techniek">Techniek &amp; warmtebron</a></li>
+          <li><a href="#onderhoud">Onderhoud &amp; garantie</a></li>
+        </ul>
+      </aside>
+
+      <div class="faq-content">
+
+        <div class="faq-section" id="algemeen">
+          <h2 class="reveal">Algemeen</h2>
+
+          <details class="faq-item reveal">
+            <summary>Is vloerverwarming geschikt voor mijn huis?</summary>
+            <div class="faq-answer">
+              <p>In bijna alle woningen is vloerverwarming mogelijk — bestaand of nieuw, klein of groot. Het hangt af van een paar factoren:</p>
+              <ul>
+                <li><strong>Isolatie</strong> — hoe beter geïsoleerd, hoe efficiënter het systeem.</li>
+                <li><strong>Vloertype</strong> — bij een dekvloer kunnen we frezen. Bij houten vloeren werken we met speciale platen.</li>
+                <li><strong>Warmtebron</strong> — een cv-ketel of warmtepomp moet voldoende capaciteit hebben.</li>
+              </ul>
+              <p>Tijdens het intakegesprek bekijken we al deze punten en geven we een eerlijk advies.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Hoeveel scheelt vloerverwarming op mijn stookkosten?</summary>
+            <div class="faq-answer">
+              <p>Onze klanten besparen gemiddeld <strong>10 tot 20%</strong> op stookkosten, afhankelijk van isolatie en warmtebron. Vloerverwarming werkt op lagere watertemperaturen (zo'n 35–40 °C in plaats van 70 °C), wat vooral in combinatie met een warmtepomp een groot verschil maakt.</p>
+              <p>Ook geeft een warme vloer een aangenamer gevoel bij een lagere kamertemperatuur — veel mensen draaien de thermostaat 1 à 2 graden lager.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Kan ik mijn houten vloer of laminaat houden?</summary>
+            <div class="faq-answer">
+              <p>Bij elektrische vloerverwarming met een dun foliesysteem: ja, dit werkt prima onder laminaat en sommige houten vloeren. Bij watergedragen vloerverwarming moet de afwerking eraf, maar de ondervloer kan vaak blijven dankzij onze freestechniek.</p>
+              <p>Let op: niet alle houtsoorten zijn geschikt. We adviseren altijd over wat veilig en duurzaam is voor jouw specifieke vloer.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Werkt vloerverwarming ook als koeling?</summary>
+            <div class="faq-answer">
+              <p>Ja, in combinatie met een warmtepomp kan ons watergedragen systeem ook koelen. We sturen koud water (rond 18 °C) door de leidingen, wat een aangename verkoeling geeft in de zomer — zonder de tocht of het geluid van airco.</p>
+              <p>Belangrijk: de vloer wordt niet ijskoud, maar wel een paar graden onder kamertemperatuur. Dit haalt 2 à 3 graden van de binnentemperatuur af.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-section" id="kosten">
+          <h2 class="reveal">Kosten &amp; offerte</h2>
+
+          <details class="faq-item reveal">
+            <summary>Wat kost vloerverwarming gemiddeld?</summary>
+            <div class="faq-answer">
+              <p>Een ruwe indicatie van onze prijzen (per m²):</p>
+              <ul>
+                <li><strong>Watergedragen, volledige aanleg</strong> — vanaf €68/m²</li>
+                <li><strong>Watergedragen, gefreesd in bestaande dekvloer</strong> — vanaf €52/m²</li>
+                <li><strong>Elektrisch onder tegels (badkamer/keuken)</strong> — vanaf €110/m²</li>
+                <li><strong>Elektrisch foliesysteem onder laminaat</strong> — vanaf €78/m²</li>
+              </ul>
+              <p>Eindprijs hangt af van oppervlak, systeemkeuze, aantal verdeler­groepen en eventueel aanvullend werk. Vraag een offerte aan voor een persoonlijk prijsplaatje.</p>
+            </div>
+          </details>
+
+
+          <details class="faq-item reveal">
+            <summary>Nat, droog of infrezen — wat past bij mijn situatie?</summary>
+            <div class="faq-answer">
+              <p>De drie systemen verschillen vooral in waar ze passen:</p>
+              <ul>
+                <li><strong>Nat (storten)</strong> — de buizen liggen in een laag dekvloer die over het systeem heen wordt gestort. Beste warmtegeleiding. Past bij nieuwbouw of een echte renovatie waarbij de vloer er toch uit gaat.</li>
+                <li><strong>Droog</strong> — buizen in voorgevormde isolatieplaten, géén beton. Lage opbouwhoogte. Ideaal voor renovatie waar je de oude vloer wilt sparen of wanneer extra hoogte een probleem is.</li>
+                <li><strong>Infrezen</strong> — smalle sleuven van zo'n 2 cm diep in de bestaande dekvloer. Geen sloop, geen verlies van vloerhoogte. De snelste en goedkoopste manier om vloerverwarming in een bestaande woning te krijgen.</li>
+              </ul>
+              <p>Tijdens de intake adviseren we welke variant het beste past bij jouw woning en wensen.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Hoofdverwarming of bijverwarming — wat scheelt dat in prijs?</summary>
+            <div class="faq-answer">
+              <p>Vloerverwarming als <strong>bijverwarming</strong> is gemiddeld <strong>€5 — €10 per m² goedkoper</strong> dan als hoofdverwarming. De reden zit in de buisafstand:</p>
+              <ul>
+                <li><strong>Hoofdverwarming</strong> — buizen liggen 10 cm uit elkaar, voor maximale warmteafgifte.</li>
+                <li><strong>Bijverwarming</strong> — buizen kunnen 15 — 20 cm uit elkaar, omdat de radiatoren of CV het meeste werk doen.</li>
+              </ul>
+              <p>Minder buis = minder materiaal en aanlegtijd. We bespreken tijdens de intake wat past bij jouw isolatie en gewenste comfort.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Hoe snel krijg ik een offerte?</summary>
+            <div class="faq-answer">
+              <p>Binnen <strong>2 werkdagen</strong> na ons intakegesprek ontvang je een complete offerte. Hierin staat:</p>
+              <ul>
+                <li>Het voorgestelde systeem en de verdeelgroepen</li>
+                <li>Een warmteverliesberekening per ruimte</li>
+                <li>Een transparant prijsplaatje met alle posten</li>
+                <li>De geplande doorlooptijd en planning</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Kan ik subsidie krijgen?</summary>
+            <div class="faq-answer">
+              <p>Voor vloerverwarming alleen is er geen aparte subsidie. Wel kun je via de <strong>ISDE-regeling</strong> subsidie krijgen als je vloerverwarming combineert met een (hybride) warmtepomp. We helpen je graag bij de aanvraag.</p>
+              <p>Daarnaast bieden veel gemeenten een duurzaamheidslening tegen een gunstige rente — informeer hiervoor bij je eigen gemeente.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Wat zit er allemaal bij de prijs inbegrepen?</summary>
+            <div class="faq-answer">
+              <p>Onze prijzen zijn altijd <strong>inclusief</strong>:</p>
+              <ul>
+                <li>Materiaal (leidingen, verdeler, isolatie, bevestiging)</li>
+                <li>Arbeid van eigen monteurs</li>
+                <li>Aansluiten op cv of warmtepomp</li>
+                <li>Inregelen en testen</li>
+                <li>Slimme thermostaat (bij elektrisch systeem)</li>
+                <li>10 jaar garantie op systeem en werk</li>
+              </ul>
+              <p>Niet inbegrepen:</p>
+              <ul>
+                <li>Aanpassingen aan de cv-installatie</li>
+                <li>Hak- en breekwerk buiten de vloer</li>
+                <li>Sleuven dichtsmeren en egaliseren bij <strong>infrezen</strong> — daarvoor geldt een meerprijs:</li>
+              </ul>
+              <ul>
+                <li>Laagdikte tot 1 mm — <strong>€4 /m²</strong></li>
+                <li>Laagdikte tot 2 mm — <strong>€7 /m²</strong></li>
+                <li>Meer dan 2 mm — <strong>€14 /m²</strong></li>
+              </ul>
+              <p>De benodigde laagdikte hangt af van de staat van je vloer en wordt tijdens de intake exact bepaald.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-section" id="aanleg">
+          <h2 class="reveal">Aanleg &amp; frezen</h2>
+
+          <details class="faq-item reveal">
+            <summary>Hoe lang duurt de aanleg?</summary>
+            <div class="faq-answer">
+              <p>Dit varieert per project:</p>
+              <ul>
+                <li><strong>Kleine ruimte (tot 20 m²)</strong> — 1 dag</li>
+                <li><strong>Begane grond gemiddelde woning (60–100 m²)</strong> — 2 tot 3 dagen</li>
+                <li><strong>Hele woning of nieuwbouw</strong> — 3 tot 5 dagen</li>
+              </ul>
+              <p>Bij frezen kun je over de vloer lopen zodra het materiaal is afgewerkt. Een nieuwe dekvloer heeft daarna nog wel droogtijd nodig (zo'n 1 dag per cm).</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Wat is frezen precies?</summary>
+            <div class="faq-answer">
+              <p>Frezen is een techniek waarbij we met een speciale freesmachine smalle, ondiepe sleuven (ongeveer 2 cm diep) in je bestaande dekvloer maken. In die sleuven leggen we de leidingen voor de vloerverwarming.</p>
+              <p>De grote voordelen: <strong>geen sloop</strong>, geen nieuwe dekvloer nodig, en geen verlies van vloerhoogte. Binnen een paar dagen kan de vloerafwerking erop.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Veroorzaakt frezen veel stof of overlast?</summary>
+            <div class="faq-answer">
+              <p>Onze freesmachines werken met directe stofafzuiging — er komt nauwelijks stof vrij. We dichten ruimtes wel altijd af met plastic en plastic-folie, en stoffen leidingen en wandcontacten af. Na afloop wordt alles bezemschoon opgeleverd.</p>
+              <p>Wel waarschuwen we: frezen maakt geluid. Vergelijkbaar met een stofzuiger op vol vermogen. Voor buren is dit prima te doen, maar het is geen werk om naast aan je laptop te zitten.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Moet ik mijn huis leegmaken?</summary>
+            <div class="faq-answer">
+              <p>De ruimtes waar we werken moeten leeg zijn — meubels, kleden, kasten alles eraf. We werken meestal per ruimte, dus je kunt zaken vaak tijdelijk in een andere kamer zetten. We helpen graag mee met sjouwen indien nodig.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-section" id="techniek">
+          <h2 class="reveal">Techniek &amp; warmtebron</h2>
+
+          <details class="faq-item reveal">
+            <summary>Werkt vloerverwarming op mijn bestaande cv-ketel?</summary>
+            <div class="faq-answer">
+              <p>Ja, vrijwel altijd. Een moderne HR-ketel kan prima vloerverwarming aansturen. Wel installeren we een mengset die het hete cv-water mengt met retourwater, zodat de juiste temperatuur (35–45 °C) in de leidingen komt.</p>
+              <p>Heb je een oudere ketel? Dan kijken we of vervanging slim is — een nieuwere ketel of warmtepomp is vaak een logische combinatie.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Is vloerverwarming geschikt voor een warmtepomp?</summary>
+            <div class="faq-answer">
+              <p>Sterker nog: vloerverwarming is dé ideale partner voor een warmtepomp. Beide werken met lage temperaturen (rond 35 °C), wat de warmtepomp veel efficiënter laat draaien dan bij gewone radiatoren.</p>
+              <p>We rekenen je systeem altijd door op de meest waarschijnlijke warmtebron — ook als die er nog niet is. Toekomstbestendig dus.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Hoe lang duurt het voor de vloer warm is?</summary>
+            <div class="faq-answer">
+              <p>Vloerverwarming heeft een trage reactietijd — dat is meteen het grote voordeel én nadeel:</p>
+              <ul>
+                <li><strong>Watergedragen</strong>: 2 tot 4 uur opwarmtijd</li>
+                <li><strong>Elektrisch foliesysteem</strong>: 20 tot 40 minuten</li>
+              </ul>
+              <p>Voor watergedragen systemen adviseren we om de thermostaat gewoon op een constante temperatuur in te stellen (bv. 20 °C) in plaats van veel op en neer te gaan. Een slimme thermostaat helpt dit automatisch te regelen.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-section" id="onderhoud">
+          <h2 class="reveal">Onderhoud &amp; garantie</h2>
+
+          <details class="faq-item reveal">
+            <summary>Wat houdt jullie garantie precies in?</summary>
+            <div class="faq-answer">
+              <p>Wij geven <strong>10 jaar garantie</strong> op zowel het systeem als het werk. Dat betekent: als er binnen 10 jaar iets aan de leidingen, verdeler, of installatie misgaat door iets wat wij hadden kunnen voorkomen, komen wij dat kosteloos oplossen.</p>
+              <p>De fabrikant van de leidingen geeft daarbovenop nog 25 jaar materiaalgarantie. Garantie geldt niet bij externe schade (boren in de vloer, bijvoorbeeld).</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Heeft vloerverwarming onderhoud nodig?</summary>
+            <div class="faq-answer">
+              <p>Heel weinig. Wij adviseren:</p>
+              <ul>
+                <li><strong>1× per jaar</strong> — kort visueel checken van de verdeler en thermostaten</li>
+                <li><strong>Elke 3 tot 5 jaar</strong> — het systeem doorspoelen om eventuele luchtbellen en aanslag te verwijderen</li>
+              </ul>
+              <p>Wij bieden onderhoudscontracten waarin we dit voor je uitvoeren — vraag ernaar tijdens je offerte.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Wat als er een lekkage ontstaat?</summary>
+            <div class="faq-answer">
+              <p>Lekkages zijn extreem zeldzaam — de leidingen die wij gebruiken zijn naadloos en gaan tientallen jaren mee. Mocht er ooit iets gebeuren, dan helpen we met:</p>
+              <ul>
+                <li>Snelle opsporing met een warmtebeeldcamera</li>
+                <li>Lokaal openmaken (geen hele vloer eruit)</li>
+                <li>Reparatie en oplevering</li>
+              </ul>
+              <p>Bij garantieschade kosteloos. Bij externe schade (gat geboord, bijvoorbeeld) krijg je vooraf een offerte.</p>
+            </div>
+          </details>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding: 0;">
+  <div style="background: var(--ink); color: var(--cream); border-radius: 24px; padding: 96px 64px; text-align: center; margin: 0 auto 120px; max-width: 1280px; position: relative; overflow: hidden;" class="reveal">
+    <div class="section-eyebrow" style="color: var(--amber-soft); justify-content: center; display: inline-flex;">
+      <span style="background: var(--amber-soft); width: 28px; height: 1px;"></span>
+      Vraag ertussen?
+    </div>
+    <h2 style="color: var(--cream); margin: 0 auto 24px;">Liever <em style="color: var(--amber-soft);">direct</em> antwoord?</h2>
+    <p style="font-size: 19px; opacity: 0.8; max-width: 540px; margin: 0 auto 40px;">Bel ons of stuur een berichtje. We helpen je graag verder zonder verplichtingen.</p>
+    <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+      <a href="tel:+31646150160" class="btn-primary">Bel 06-46150160</a>
+      <a href="contact.html" class="btn-secondary" style="color: var(--cream); border-color: var(--cream);">Stuur een bericht</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="logo-icon-terracotta.svg" alt="">
+          <span class="wordmark">mijnwarmevloer<span class="tld">.nl</span></span>
+        </a>
+        <p class="footer-tagline">Vakkundige aanleg van vloerverwarming voor renovatie en nieuwbouw. Door heel Nederland.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Diensten</h5>
+        <ul>
+          <li><a href="index.html#diensten">Watergedragen</a></li>
+          <li><a href="index.html#diensten">Elektrisch</a></li>
+          <li><a href="index.html#diensten">Frezen</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Bedrijf</h5>
+        <ul>
+          <li><a href="projecten.html">Projecten</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+31646150160">06-46150160</a></li>
+          <li><a href="mailto:hallo@mijnwarmevloer.nl">hallo@mijnwarmevloer.nl</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 mijnwarmevloer.nl — een handelsnaam van Creditline BV · KvK 59683198 · BTW NL853603108B01</div>
+      <div><a href="privacy.html">Privacy</a> · <a href="voorwaarden.html">Algemene voorwaarden</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// Highlight active sidebar item based on scroll
+const sections = document.querySelectorAll('.faq-section');
+const navLinks = document.querySelectorAll('.faq-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    const top = s.offsetTop - 200;
+    if (window.scrollY >= top) current = s.id;
+  });
+  navLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projecten — mijnwarmevloer.nl</title>
+<meta name="description" content="Een selectie van onze recente vloerverwarmingsprojecten — van rijwoningen tot vrijstaande nieuwbouw.">
+<!-- ============ SEO & SOCIAL ============ -->
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mijnwarmevloer.nl/projecten.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="mijnwarmevloer.nl">
+<meta property="og:url" content="https://mijnwarmevloer.nl/projecten.html">
+<meta property="og:title" content="Projecten — mijnwarmevloer.nl">
+<meta property="og:description" content="Een selectie van recente vloerverwarmingsprojecten — van rijwoningen tot vrijstaande nieuwbouw. Filterbaar op renovatie, nieuwbouw, elektrisch en watergedragen.">
+<meta property="og:image" content="https://mijnwarmevloer.nl/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="mijnwarmevloer.nl — vloerverwarming op maat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Projecten — mijnwarmevloer.nl">
+<meta name="twitter:description" content="Een selectie van recente vloerverwarmingsprojecten — van rijwoningen tot vrijstaande nieuwbouw. Filterbaar op renovatie, nieuwbouw, elektrisch en watergedragen.">
+<meta name="twitter:image" content="https://mijnwarmevloer.nl/og-image.jpg">
+
+<!-- ============ ANALYTICS (kies er een en haal de comment-haakjes weg) ============ -->
+<!--
+  Plausible (privacy-friendly, ~€9/mnd, geen cookiebanner nodig)
+  Aanmelden op https://plausible.io en YOUR-DOMAIN.NL hieronder vervangen.
+-->
+<!-- <script defer data-domain="YOUR-DOMAIN.NL" src="https://plausible.io/js/script.js"></script> -->
+
+<!--
+  Google Analytics 4 (gratis, in NL/EU heb je een cookiebanner nodig)
+  Maak een property aan op https://analytics.google.com en vervang G-XXXXXXXXXX.
+-->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+<!-- ============ END SEO & SOCIAL ============ -->
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js-enabled");</script>
+<link rel="stylesheet" href="style.css">
+<style>
+.filters {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin: 40px 0 60px;
+}
+.filter-btn {
+  padding: 10px 20px;
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  font-family: inherit;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all .2s;
+}
+.filter-btn:hover { border-color: var(--terracotta); color: var(--terracotta); }
+.filter-btn.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 32px;
+  padding-bottom: 120px;
+}
+.project { grid-column: span 6; }
+.project.large { grid-column: span 8; }
+.project.small { grid-column: span 4; }
+.project.full { grid-column: span 12; }
+
+.project-image {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--ink);
+  margin-bottom: 24px;
+  transition: transform .4s ease;
+}
+.project:hover .project-image { transform: translateY(-6px); }
+.project-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(0deg, rgba(30,22,18,0.4) 0%, transparent 50%);
+}
+.project-image svg.bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.project-tag {
+  position: absolute; top: 20px; left: 20px; z-index: 3;
+  background: var(--cream); color: var(--ink);
+  padding: 8px 14px; border-radius: 999px;
+  font-size: 12px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.project-stat {
+  position: absolute; bottom: 20px; right: 20px; z-index: 3;
+  background: rgba(244, 236, 224, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 10px 16px; border-radius: 10px;
+  font-size: 13px; color: var(--ink);
+}
+.project-stat strong { color: var(--terracotta); font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; display: block; }
+.project-meta { font-size: 13px; color: var(--terracotta); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 12px; font-weight: 500; }
+.project h3 { font-size: 28px; line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.02em; }
+.project p { color: var(--ink-soft); font-size: 15px; }
+
+/* Project image illustrations using gradients + patterns */
+.bg-warm-room { background: linear-gradient(140deg, #D4823A 0%, #8E3A1C 100%); }
+.bg-cool-room { background: linear-gradient(160deg, #4A3B33 0%, #1E1612 100%); }
+.bg-light-room { background: linear-gradient(135deg, #F2C68A 0%, #C2562E 100%); }
+.bg-deep-room { background: linear-gradient(150deg, #8E3A1C 0%, #2A1810 100%); }
+.bg-amber-room { background: linear-gradient(125deg, #E89C3F 0%, #8E3A1C 100%); }
+.bg-night-room { background: linear-gradient(155deg, #2A1810 0%, #1E1612 100%); }
+
+.floor-grid {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0, transparent 80px, rgba(244,236,224,0.1) 80px, rgba(244,236,224,0.1) 81px),
+    repeating-linear-gradient(0deg, transparent 0, transparent 60px, rgba(244,236,224,0.07) 60px, rgba(244,236,224,0.07) 61px);
+  transform: perspective(800px) rotateX(60deg);
+  transform-origin: bottom;
+}
+.warm-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 70%, rgba(232,156,63,0.5) 0%, transparent 60%);
+}
+
+@media (max-width: 968px) {
+  .project, .project.large, .project.small, .project.full { grid-column: span 12; }
+  .filters { margin: 24px 0 40px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-icon-ink.svg" alt="">
+      <span class="wordmark">mijnwarmevloer<span class="tld">.nl</span></span>
+    </a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projecten.html" class="active">Projecten</a></li>
+      <li><a href="faq.html">Veelgestelde vragen</a></li>
+      <li><a href="contact.html" class="nav-cta">Offerte aanvragen</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container reveal">
+    <div class="breadcrumb">— Projecten</div>
+    <h1>Werk waar we <em>warm</em> van worden.</h1>
+    <p class="lead">Een selectie van recente projecten — van rijwoningen in Utrecht tot vrijstaande nieuwbouw in Brabant. Klik door voor details over aanpak, materialen en resultaat.</p>
+  </div>
+</header>
+
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="alle">Alle projecten</button>
+      <button class="filter-btn" data-filter="renovatie">Renovatie</button>
+      <button class="filter-btn" data-filter="nieuwbouw">Nieuwbouw</button>
+      <button class="filter-btn" data-filter="elektrisch">Elektrisch</button>
+      <button class="filter-btn" data-filter="watergedragen">Watergedragen</button>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="project large reveal" data-cat="renovatie watergedragen">
+        <div class="project-image bg-warm-room">
+          <div class="warm-glow"></div>
+          <div class="floor-grid"></div>
+          <span class="project-tag">Renovatie</span>
+          <div class="project-stat"><strong>118 m²</strong>Watergedragen, gefreesd</div>
+        </div>
+        <div class="project-meta">Utrecht · 2025</div>
+        <h3>Jaren '30 woning, hele begane grond</h3>
+        <p>Gefreesd in de bestaande dekvloer zonder breekwerk. Aangesloten op hybride warmtepomp. Project afgerond in 3 werkdagen.</p>
+      </div>
+
+      <div class="project small reveal" data-cat="renovatie elektrisch">
+        <div class="project-image bg-light-room">
+          <div class="warm-glow"></div>
+          <div class="floor-grid"></div>
+          <span class="project-tag">Elektrisch</span>
+          <div class="project-stat"><strong>14 m²</strong>Badkamer</div>
+        </div>
+        <div class="project-meta">Amsterdam · 2025</div>
+        <h3>Badkamer renovatie</h3>
+        <p>Foliesysteem onder tegels met aparte thermostaat.</p>
+      </div>
+
+      <div class="project small reveal" data-cat="nieuwbouw watergedragen">
+        <div class="project-image bg-cool-room">
+          <div class="warm-glow"></div>
+          <div class="floor-grid"></div>
+          <span class="project-tag">Nieuwbouw</span>
+          <div class="project-stat"><strong>165 m²</strong>2 verdiepingen</div>
+        </div>
+        <div class="project-meta">Breda · 2025</div>
+        <h3>Vrijstaande nieuwbouw</h3>
+        <p>Volledig watergedragen, aangesloten op grondgebonden warmtepomp.</p>
+      </div>
+
+      <div class="project large reveal" data-cat="nieuwbouw watergedragen">
+        <div class="project-image bg-amber-room">
+          <div class="warm-glow"></div>
+          <div class="floor-grid"></div>
+          <span class="project-tag">Nieuwbouw</span>
+          <div class="project-stat"><strong>220 m²</strong>Bungalow</div>
+        </div>
+        <div class="project-meta">Apeldoorn · 2024</div>
+        <h3>Energieneutrale bungalow</h3>
+        <p>Vloerverwarming én -koeling, gecombineerd met PVT-panelen. De vloer levert in de winter warmte en in de zomer een aangename verkoeling.</p>
+      </div>
+
+      <div class="project reveal" data-cat="renovatie watergedragen">
+        <div class="project-image bg-deep-room">
+          <div class="warm-glow"></div>
+          <div class="floor-grid"></div>
+          <span class="project-tag">Renovatie</span>
+          <div class="project-stat"><strong>92 m²</strong>Begane grond</div>
+        </div>
+        <div class="project-meta">Den Haag · 2024</div>
+        <h3>Rijtjeswoning, behoud houten vloer</h3>
+        <p>Speciaal systeem onder bestaande houten vloer aangebracht. Geen sloop, geen langdurige overlast.</p>
+      </div>
+
+      <div class="project reveal" data-cat="renovatie elektrisch">
+        <div class="project-image bg-night-room">
+          <div class="warm-glow"></div>
+          <div class="floor-grid"></div>
+          <span class="project-tag">Elektrisch</span>
+          <div class="project-stat"><strong>22 m²</strong>Keuken</div>
+        </div>
+        <div class="project-meta">Eindhoven · 2024</div>
+        <h3>Open keuken met laminaat</h3>
+        <p>Dun foliesysteem direct onder laminaat. Vloer voelt binnen 20 minuten warm aan.</p>
+      </div>
+
+      <div class="project small reveal" data-cat="renovatie watergedragen">
+        <div class="project-image bg-warm-room">
+          <div class="warm-glow"></div>
+          <div class="floor-grid"></div>
+          <span class="project-tag">Renovatie</span>
+          <div class="project-stat"><strong>74 m²</strong>Frezen</div>
+        </div>
+        <div class="project-meta">Zwolle · 2024</div>
+        <h3>Twee-onder-een-kap</h3>
+        <p>Eén dag aanleg, één dag drogen, klaar.</p>
+      </div>
+
+      <div class="project small reveal" data-cat="nieuwbouw watergedragen">
+        <div class="project-image bg-light-room">
+          <div class="warm-glow"></div>
+          <div class="floor-grid"></div>
+          <span class="project-tag">Nieuwbouw</span>
+          <div class="project-stat"><strong>148 m²</strong>Hoekwoning</div>
+        </div>
+        <div class="project-meta">Almere · 2024</div>
+        <h3>Energiezuinige hoekwoning</h3>
+        <p>Standaard systeem op hybride warmtepomp.</p>
+      </div>
+
+      <div class="project small reveal" data-cat="renovatie elektrisch">
+        <div class="project-image bg-cool-room">
+          <div class="warm-glow"></div>
+          <div class="floor-grid"></div>
+          <span class="project-tag">Elektrisch</span>
+          <div class="project-stat"><strong>9 m²</strong>Toilet + hal</div>
+        </div>
+        <div class="project-meta">Rotterdam · 2024</div>
+        <h3>Toilet en gang</h3>
+        <p>Kleine ruimte, snelle aanleg in één dagdeel.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding: 0;">
+  <div style="background: var(--terracotta); color: var(--cream); border-radius: 24px; padding: 96px 64px; text-align: center; margin: 0 auto 120px; max-width: 1280px; position: relative; overflow: hidden;" class="reveal">
+    <h2 style="color: var(--cream); margin: 0 auto 24px;">Jouw project <em style="color: var(--amber-soft);">hierboven</em> zien?</h2>
+    <p style="font-size: 19px; opacity: 0.9; max-width: 540px; margin: 0 auto 40px;">Vraag een offerte aan en wie weet staan we volgend kwartaal bij jou.</p>
+    <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+      <a href="contact.html" class="btn-primary" style="background: var(--cream); color: var(--ink);">Offerte aanvragen</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="logo-icon-terracotta.svg" alt="">
+          <span class="wordmark">mijnwarmevloer<span class="tld">.nl</span></span>
+        </a>
+        <p class="footer-tagline">Vakkundige aanleg van vloerverwarming voor renovatie en nieuwbouw. Door heel Nederland.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Diensten</h5>
+        <ul>
+          <li><a href="index.html#diensten">Watergedragen</a></li>
+          <li><a href="index.html#diensten">Elektrisch</a></li>
+          <li><a href="index.html#diensten">Frezen</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Bedrijf</h5>
+        <ul>
+          <li><a href="projecten.html">Projecten</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+31646150160">06-46150160</a></li>
+          <li><a href="mailto:hallo@mijnwarmevloer.nl">hallo@mijnwarmevloer.nl</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 mijnwarmevloer.nl — een handelsnaam van Creditline BV · KvK 59683198 · BTW NL853603108B01</div>
+      <div><a href="privacy.html">Privacy</a> · <a href="voorwaarden.html">Algemene voorwaarden</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// Filter projects
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.project').forEach(p => {
+      if (f === 'alle' || p.dataset.cat.includes(f)) {
+        p.style.display = '';
+      } else {
+        p.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "mijnwarmevloer-nl",
+  "version": "1.0.0",
+  "description": "Website + offerteformulier voor mijnwarmevloer.nl (Creditline BV)",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "resend": "^4.0.1"
+  }
+}
