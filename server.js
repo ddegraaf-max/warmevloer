@@ -29,6 +29,12 @@ const resend = new Resend(RESEND_API_KEY);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ---- 301-redirects voor verwijderde pagina's ----
+// De projecten-pagina bestaat niet meer; stuur oude links permanent naar de homepage.
+app.get(['/projecten', '/projecten.html'], (req, res) => {
+  res.redirect(301, '/');
+});
+
 // Simpele in-memory rate limiter: max 5 inzendingen per IP per 10 minuten
 const submissions = new Map();
 function rateLimit(ip) {
