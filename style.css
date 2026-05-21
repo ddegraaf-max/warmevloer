@@ -215,11 +215,26 @@ html.js-enabled .reveal {
     gap: 5px;
     cursor: pointer;
     padding: 8px;
+    flex-shrink: 0;
   }
-  .nav-toggle span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
+  .nav-toggle span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform .3s ease, opacity .3s ease; }
+  /* Hamburger → X animation when menu is open */
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  /* Keep logo from pushing the toggle off-screen */
+  .nav-logo .wordmark { font-size: 20px; }
+  .nav-logo img { width: 32px; height: 32px; }
+  nav .container { padding: 0 20px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 48px; }
   section { padding: 80px 0; }
   .container { padding: 0 20px; }
   .page-hero { padding: 140px 0 60px; }
 }
-.nav-toggle { display: none; }
+@media (min-width: 969px) {
+  .nav-toggle { display: none; }
+}
+
+/* Prevent any horizontal overflow on mobile */
+html, body { overflow-x: hidden; max-width: 100%; }
+.footer-col a, .footer-col li { word-break: break-word; overflow-wrap: anywhere; }

@@ -42,6 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (navToggle && navMenu) {
     navToggle.addEventListener('click', () => {
       navMenu.classList.toggle('mobile-open');
+      navToggle.classList.toggle('open');
+    });
+    // Close the menu when a link inside it is tapped
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('mobile-open');
+        navToggle.classList.remove('open');
+      });
     });
   }
 });
