@@ -272,35 +272,47 @@ app.post('/api/adres-lookup', async (req, res) => {
   const tv = (toevoeging || '').trim();
 
   try {
-    // Stap 1: adres opzoeken in Locatieserver
+    // Stap 1: adres opzoeken in Locatieserver — geeft ons de adresseerbaarobject_id
     const q = `postcode:${pcClean} AND huisnummer:${hn}${tv ? ' AND huisletter:' + tv[0] : ''}`;
-    const url = `https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=${encodeURIComponent(q)}&fq=type:adres&rows=5&fl=id,weergavenaam,adresseerbaarobject_id,straatnaam,huisnummer,huisletter,huistoevoeging,postcode,woonplaatsnaam`;
+    const url = `https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=${encodeURIComponent(q)}&fq=type:adres&rows=5&fl=id,weergavenaam,adresseerbaarobject_id,nummeraanduiding_id,straatnaam,huisnummer,huisletter,huistoevoeging,postcode,woonplaatsnaam`;
+    console.log(`[lookup] ${pcClean} ${hn}${tv} → Locatieserver`);
     const lookupRes = await fetch(url);
     if (!lookupRes.ok) throw new Error('Locatieserver HTTP ' + lookupRes.status);
     const lookupData = await lookupRes.json();
     const docs = lookupData?.response?.docs || [];
     if (docs.length === 0) {
+      console.log(`[lookup] geen adres gevonden`);
       return res.json({ ok: false, notFound: true, error: 'Dit adres kunnen we niet vinden. Vul de oppervlakte hieronder handmatig in.' });
     }
     const doc = docs[0];
     const adresseerbaarObjectId = doc.adresseerbaarobject_id;
+    console.log(`[lookup] adres: ${doc.weergavenaam} — adresseerbaarobject_id=${adresseerbaarObjectId}`);
 
-    // Stap 2: oppervlakte ophalen via BAG-API (Haal Centraal)
+    // Stap 2: oppervlakte ophalen via BAG OGC API Features (gratis, geen key)
+    // De adresseerbaarobject_id is het identificatienummer van het verblijfsobject.
     let oppervlakte = null;
     if (adresseerbaarObjectId) {
       try {
-        const bagRes = await fetch(`https://api.pdok.nl/lv/bag/individuelebevragingen/v2/verblijfsobjecten/${adresseerbaarObjectId}`, {
-          headers: { 'Accept': 'application/hal+json', 'Accept-Crs': 'epsg:28992' }
-        });
+        const bagUrl = `https://api.pdok.nl/lv/bag/ogc/v1/collections/verblijfsobject/items?identificatie=${encodeURIComponent(adresseerbaarObjectId)}&f=json&limit=1`;
+        console.log(`[lookup] BAG OGC → ${bagUrl}`);
+        const bagRes = await fetch(bagUrl, { headers: { 'Accept': 'application/json' } });
+        console.log(`[lookup] BAG OGC status: ${bagRes.status}`);
         if (bagRes.ok) {
           const bagData = await bagRes.json();
-          oppervlakte = bagData?.verblijfsobject?.verblijfsobject?.oppervlakte
-                      || bagData?.oppervlakte
+          const feature = bagData?.features?.[0];
+          const props = feature?.properties || {};
+          // Verschillende BAG-varianten kunnen dit veld anders noemen
+          oppervlakte = props.oppervlakte
+                      || props.gebruiksoppervlakte
+                      || props.oppervlakte_verblijfsobject
                       || null;
+          console.log(`[lookup] oppervlakte: ${oppervlakte} m² (props: ${Object.keys(props).join(',')})`);
+        } else {
+          const text = await bagRes.text();
+          console.warn(`[lookup] BAG OGC faalde: ${bagRes.status} — ${text.slice(0, 200)}`);
         }
       } catch (e) {
-        // BAG-call kan falen (rate limit, onbekend object); we hebben nog het adres, dus we tonen dat en laten de gebruiker m² zelf invullen
-        console.warn('BAG-lookup failed:', e.message);
+        console.warn('[lookup] BAG-call fout:', e.message);
       }
     }
 
