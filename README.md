@@ -1,81 +1,99 @@
 # mijnwarmevloer.nl
 
 Website + offerteformulier voor **mijnwarmevloer.nl** — een handelsnaam van Creditline BV.
-
-Het formulier verstuurt aanvragen via [Resend](https://resend.com) naar je inbox.
+Het formulier verstuurt aanvragen via [Resend](https://resend.com) en is beschermd door
+6 lagen anti-spam plus Cloudflare Turnstile.
 
 ---
 
 ## 📂 Structuur
 
-Alle bestanden staan plat in de hoofdmap (geen submappen — makkelijker uploaden):
+Alle bestanden staan plat in de hoofdmap:
 
 ```
 .
-├── index.html, contact.html, faq.html, projecten.html,
-│   privacy.html, voorwaarden.html       ← de website-pagina's
-├── style.css, script.js                 ← styling + interactie
-├── favicon.svg, favicon.ico, *.svg,     ← afbeeldingen/logo's
-│   og-image.jpg, robots.txt, sitemap.xml
-├── server.js         ← Node.js-server: serveert de site + verwerkt het formulier
-├── package.json      ← dependencies (express, resend)
-├── Dockerfile        ← bouwt de container voor Railway
-├── .gitignore
-└── README.md
+├── index.html, contact.html, faq.html,
+│   privacy.html, voorwaarden.html        ← de pagina's
+├── style.css, script.js                  ← styling + interactie
+├── *.svg, *.jpg, *.ico, robots.txt,      ← assets
+│   sitemap.xml
+├── server.js          ← Node.js-server (statische site + formulier-API)
+├── package.json       ← dependencies (express, resend)
+├── Dockerfile         ← bouwt de container voor Railway
+└── .gitignore
 ```
-
-> De server vindt de website-bestanden automatisch, of ze nu in de hoofdmap staan of in een `public/`-submap.
 
 ---
 
 ## ⚙️ Environment variables (instellen in Railway)
 
-De server gebruikt 3 omgevingsvariabelen. Stel ze in via Railway → je service → tab **Variables**:
-
-| Variabele | Verplicht | Voorbeeld | Uitleg |
+| Variabele | Verplicht? | Voorbeeld | Uitleg |
 |---|---|---|---|
-| `RESEND_API_KEY` | ✅ ja | `re_xxxxxxxx` | Je Resend API-key |
-| `MAIL_TO` | nee | `hallo@mijnwarmevloer.nl` | Waar aanvragen heen gaan (default: hallo@mijnwarmevloer.nl) |
-| `MAIL_FROM` | nee | `offerte@mijnwarmevloer.nl` | Afzender (default: onboarding@resend.dev) |
+| `RESEND_API_KEY` | ✅ | `re_xxxxxxxx` | Resend API-key |
+| `MAIL_TO` | nee | `hallo@mijnwarmevloer.nl` | Waar aanvragen heen gaan |
+| `MAIL_FROM` | nee | `offerte@mijnwarmevloer.nl` | Afzender (na domeinverificatie) |
+| `TURNSTILE_SECRET` | ⚠️ aanbevolen | `0x4AAA...` | Cloudflare Turnstile secret key |
+| `FORM_SIGNING_SECRET` | aanbevolen | (lange random string) | HMAC-secret voor form-tokens |
 
-> **Belangrijk:** zet de API-key NOOIT in de code of in GitHub. Alleen in Railway's Variables-tab. Daar staat hij veilig en is hij niet zichtbaar voor bezoekers.
+> **Zonder `TURNSTILE_SECRET`** werkt het formulier nog, maar zonder die laag.
+> **Zonder `FORM_SIGNING_SECRET`** gebruikt de server een random secret dat bij elke
+> deploy verandert (formulieren die op een oude versie zijn geladen werken dan niet meer).
 
----
-
-## 🚀 Stap-voor-stap configuratie
-
-### Stap 1 — Nieuwe API-key in Resend
-1. Ga naar [resend.com/api-keys](https://resend.com/api-keys)
-2. Verwijder de oude key (als je 'm al ergens hebt gedeeld)
-3. Klik **Create API Key**, geef 'm een naam (bv. "Railway productie"), kies **Sending access**
-4. Kopieer de key (begint met `re_...`) — je ziet 'm maar één keer
-
-### Stap 2 — Key in Railway zetten
-1. Ga naar je Railway-project → klik je service
-2. Tab **Variables** → **+ New Variable**
-3. Naam: `RESEND_API_KEY`, waarde: plak je key
-4. Voeg eventueel `MAIL_TO` en `MAIL_FROM` toe
-5. Railway redeployt automatisch
-
-### Stap 3 — Domein verifiëren in Resend (belangrijk!)
-Standaard kun je alleen mailen vanaf `onboarding@resend.dev`. Om vanaf `@mijnwarmevloer.nl` te versturen:
-
-1. Ga naar [resend.com/domains](https://resend.com/domains) → **Add Domain**
-2. Voer `mijnwarmevloer.nl` in
-3. Resend geeft je een aantal **DNS-records** (SPF, DKIM)
-4. Zet die records bij je domeinregistrar (waar je `mijnwarmevloer.nl` hebt gekocht)
-5. Wacht tot Resend de domein als "Verified" markeert (kan tot een uur duren)
-6. Zet daarna `MAIL_FROM` in Railway op bv. `offerte@mijnwarmevloer.nl`
-
-> Tot je domein geverifieerd is: laat `MAIL_FROM` leeg (dan gebruikt 'ie `onboarding@resend.dev`). De mail komt dan nog steeds aan, alleen met een Resend-afzender.
+Genereer een goede `FORM_SIGNING_SECRET` op je eigen computer:
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+Of via een willekeurige password generator (minimaal 32 tekens).
 
 ---
 
-## 🧪 Testen
-1. Open je site → ga naar Contact
-2. Vul het formulier in en verstuur
-3. Check de inbox van `MAIL_TO`
-4. Lukt het niet? Kijk in Railway → **Deploy Logs** voor foutmeldingen
+## 🛡️ Spam-bescherming (6 lagen + Turnstile)
+
+Het formulier heeft de volgende verdediging, allemaal onzichtbaar voor echte bezoekers:
+
+1. **Minimale invultijd** — submits binnen 2 seconden = bot
+2. **Honeypot-velden** (4 stuks) — verborgen velden die bots vullen, mensen nooit
+3. **Ondertekend form-token** — HMAC-gesigneerd timestamp, voorkomt replay-aanvallen
+4. **Content-spamfilter** — detecteert spam-trefwoorden, URLs in tekst, hoofdletters-spam, niet-Latijns schrift
+5. **Gelaagde rate limiting** — 5 per 10min, 10 per uur, 20 per dag per IP
+6. **Stille blokkering** — bots krijgen altijd "ok" terug zodat ze niet leren wat werkt
+7. **Cloudflare Turnstile** — CAPTCHA-vervanger, vrijwel altijd onzichtbaar voor mensen
+
+Spam-pogingen zie je in de Railway Deploy Logs (regels die beginnen met `[spam]`).
+
+---
+
+## 🚀 Setup stap-voor-stap
+
+### 1. Resend
+- [resend.com/api-keys](https://resend.com/api-keys) → nieuwe key aanmaken
+- Zet als `RESEND_API_KEY` in Railway → **Variables**
+- Optioneel: domein verifiëren op [resend.com/domains](https://resend.com/domains), dan kun je `MAIL_FROM=offerte@mijnwarmevloer.nl` instellen
+
+### 2. Cloudflare Turnstile (gratis, ~2 min werk)
+1. Ga naar [dash.cloudflare.com](https://dash.cloudflare.com) — gratis account aanmaken als je er nog geen hebt
+2. In het menu links: klik **Turnstile**
+3. Klik **Add Site**
+4. Vul in:
+   - **Site name**: `mijnwarmevloer.nl`
+   - **Domain**: voeg toe `mijnwarmevloer.nl`, `www.mijnwarmevloer.nl`, en (voor nu ook) `mijnwarmevloer-production.up.railway.app`
+   - **Widget Mode**: kies **Managed** (Cloudflare bepaalt zelf of een challenge nodig is)
+5. Klik **Create** — je krijgt twee waardes:
+   - **Site Key** (begint met `0x4AAA...`)
+   - **Secret Key** (begint met `0x4AAA...`, andere waarde)
+6. Open `contact.html` op GitHub → klik potloodje → zoek `YOUR_TURNSTILE_SITEKEY` en vervang door je **Site Key** → Commit
+7. In Railway → **Variables** → nieuwe variable `TURNSTILE_SECRET` met je **Secret Key**
+8. Railway redeployt automatisch
+
+### 3. Form signing secret
+1. Genereer een random string (zie hierboven, of gebruik een password manager)
+2. In Railway → **Variables** → `FORM_SIGNING_SECRET` = die string
+
+### 4. Testen
+- Open je site → ga naar Contact → vul formulier in en verstuur
+- Je zou onderaan kort een Turnstile-widget moeten zien (vaak alleen een vinkje, geen challenge)
+- Check inbox van `MAIL_TO`
+- In Railway → Deploy Logs zie je `[spam] ...` regels voor afgewezen pogingen
 
 ---
 
@@ -84,11 +102,11 @@ Standaard kun je alleen mailen vanaf `onboarding@resend.dev`. Om vanaf `@mijnwar
 npm install
 RESEND_API_KEY=re_xxxx MAIL_TO=jij@voorbeeld.nl npm start
 ```
-Open dan http://localhost:8080
+Open http://localhost:8080. Turnstile-laag staat uit als je `TURNSTILE_SECRET` niet meegeeft.
 
 ---
 
 ## 🏢 Zakelijk
-mijnwarmevloer.nl — een handelsnaam van **Creditline BV**
+mijnwarmevloer.nl — handelsnaam van **Creditline BV**
 Torenlaan 5A, 1402 AT Bussum · KvK 59683198 · BTW NL853603108B01
 Daniel de Graaf · 06-46150160 · hallo@mijnwarmevloer.nl

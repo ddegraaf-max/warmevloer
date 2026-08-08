@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offerte-tool — direct een richtprijs · mijnwarmevloer.nl</title>
+<meta name="description" content="Bereken direct wat vloerverwarming voor jouw woning kost. Vul je adres in en krijg een richtprijs op basis van je woningoppervlakte.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mijnwarmevloer.nl/offerte-tool.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js-enabled");</script>
+<link rel="stylesheet" href="style.css">
+
+<style>
+  .tool-page { padding: 140px 0 100px; }
+  .tool-page .container { max-width: 780px; }
+  .tool-page .breadcrumb { font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--terracotta); font-weight: 500; margin-bottom: 16px; }
+  .tool-page h1 { font-size: clamp(36px, 5vw, 56px); margin-bottom: 16px; line-height: 1.05; letter-spacing: -0.02em; }
+  .tool-page h1 em { color: var(--terracotta); font-family: 'Fraunces', serif; font-weight: 400; }
+  .tool-page .lead { font-size: 19px; color: var(--ink-soft); margin-bottom: 40px; line-height: 1.6; max-width: 620px; }
+
+  /* Steps indicator */
+  .steps { display: flex; gap: 8px; margin-bottom: 40px; }
+  .step-dot { flex: 1; height: 3px; background: var(--line); border-radius: 2px; position: relative; }
+  .step-dot.done { background: var(--terracotta); }
+  .step-dot.active { background: var(--terracotta); }
+  .step-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); margin-top: 8px; text-align: center; }
+  .step-dot.active .step-label, .step-dot.done .step-label { color: var(--ink); }
+
+  /* Panels */
+  .tool-panel {
+    background: white; border: 1px solid var(--line); border-radius: 16px;
+    padding: 32px; margin-bottom: 20px;
+  }
+  .tool-panel.active { border-color: var(--terracotta); box-shadow: 0 6px 20px rgba(194,86,46,0.08); }
+  .tool-panel.done { background: var(--cream-deep); }
+  .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .panel-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; }
+  .panel-num { font-family: 'Fraunces', serif; font-style: italic; color: var(--terracotta); margin-right: 8px; }
+  .panel-summary { color: var(--ink-soft); font-size: 14px; }
+  .edit-btn { font-size: 13px; color: var(--terracotta); background: none; border: none; cursor: pointer; text-decoration: underline; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-row.three { grid-template-columns: 1fr 1fr 1fr; }
+  .field label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin-bottom: 6px; }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px;
+    background: white; font-family: inherit; font-size: 15px; color: var(--ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--terracotta); }
+  .field .hint { font-size: 12px; color: var(--stone); margin-top: 4px; }
+
+  .btn-primary, .btn-secondary {
+    padding: 12px 24px; border-radius: 999px; font-family: inherit; font-size: 15px;
+    font-weight: 500; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary { background: var(--ink); color: var(--cream); }
+  .btn-primary:hover { background: var(--terracotta); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn-secondary:hover { border-color: var(--ink); }
+
+  .adres-result {
+    background: var(--cream); border-radius: 10px; padding: 16px 20px; margin: 16px 0;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .adres-result .icon { color: var(--terracotta); flex-shrink: 0; }
+  .adres-result .adres { font-weight: 500; }
+  .adres-result .oppervlakte { color: var(--ink-soft); font-size: 14px; }
+
+  .error-msg { color: var(--terracotta-deep); background: #FDE8E1; padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-top: 12px; }
+
+  /* System selection cards */
+  .systemen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0 16px; }
+  .systeem-card {
+    border: 2px solid var(--line); border-radius: 12px; padding: 16px; cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .systeem-card:hover { border-color: var(--stone); }
+  .systeem-card.selected { border-color: var(--terracotta); background: var(--cream); }
+  .systeem-card input { position: absolute; opacity: 0; pointer-events: none; }
+  .systeem-card .naam { font-weight: 500; margin-bottom: 4px; }
+  .systeem-card .prijs { font-size: 13px; color: var(--terracotta); font-family: 'Fraunces', serif; font-style: italic; }
+  .systeem-card .beschrijving { font-size: 12px; color: var(--ink-soft); margin-top: 6px; line-height: 1.4; }
+
+  /* Live price panel */
+  .prijs-live {
+    background: linear-gradient(135deg, #E89C3F 0%, #C2562E 100%);
+    color: var(--cream); border-radius: 16px; padding: 32px; margin: 24px 0;
+    text-align: center;
+  }
+  .prijs-live .kop { font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; opacity: 0.9; margin-bottom: 8px; }
+  .prijs-live .bedrag { font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(36px, 6vw, 52px); line-height: 1; margin-bottom: 8px; }
+  .prijs-live .detail { font-size: 14px; opacity: 0.85; }
+  .prijs-live .disclaimer { font-size: 12px; opacity: 0.8; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(244,236,224,0.3); }
+
+  .success-msg {
+    background: linear-gradient(135deg, #F4ECE0 0%, #EADFCD 100%);
+    border-radius: 16px; padding: 40px; text-align: center; margin-top: 24px;
+  }
+  .success-msg .checkmark {
+    width: 60px; height: 60px; border-radius: 50%; background: var(--terracotta);
+    display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;
+  }
+  .success-msg h2 { font-size: 28px; margin-bottom: 12px; }
+  .success-msg p { color: var(--ink-soft); line-height: 1.6; }
+
+  .spinner {
+    display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: var(--cream); border-radius: 50%; animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .frezen-opties { margin-top: 12px; padding: 12px 16px; background: var(--cream); border-radius: 8px; }
+  .frezen-opties label { font-size: 13px; }
+
+  @media (max-width: 700px) {
+    .tool-page { padding: 100px 0 60px; }
+    .tool-panel { padding: 20px; }
+    .form-row, .form-row.three { grid-template-columns: 1fr; }
+    .systemen { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-icon-ink.svg" alt="">
+      <span class="wordmark">mijnwarmevloer<span class="tld">.nl</span></span>
+    </a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="faq.html">Veelgestelde vragen</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="offerte-tool.html" class="nav-cta">Bereken je prijs</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="tool-page">
+  <div class="container">
+    <div class="breadcrumb">— Offerte-tool</div>
+    <h1>Bereken direct <em>jouw richtprijs</em>.</h1>
+    <p class="lead">Vul je adres in, kies een systeem, en zie meteen wat vloerverwarming voor jouw woning kost. Binnen 2 werkdagen ontvang je een definitieve offerte op maat.</p>
+
+    <form id="toolForm" novalidate>
+      <!-- Honeypots -->
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+        <label>Laat leeg <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+        <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        <label>URL <input type="text" name="url" tabindex="-1" autocomplete="off"></label>
+        <label>Tweede telefoon <input type="text" name="phone_number_2" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <input type="hidden" name="_formToken" id="_formToken" value="">
+
+      <!-- Steps indicator -->
+      <div class="steps">
+        <div class="step-dot active" id="stepDot1"><div class="step-label">1. Adres</div></div>
+        <div class="step-dot" id="stepDot2"><div class="step-label">2. Systeem</div></div>
+        <div class="step-dot" id="stepDot3"><div class="step-label">3. Contact</div></div>
+      </div>
+
+      <!-- ============ STAP 1: ADRES ============ -->
+      <div class="tool-panel active" id="panel1">
+        <div class="panel-header">
+          <div class="panel-title"><span class="panel-num">1.</span> Waar komt de vloerverwarming?</div>
+        </div>
+        <div class="form-row three">
+          <div class="field" style="grid-column: span 2;">
+            <label for="postcode">Postcode</label>
+            <input type="text" id="postcode" name="postcode" placeholder="1234 AB" maxlength="8" autocomplete="postal-code">
+          </div>
+          <div class="field">
+            <label for="huisnummer">Huisnr.</label>
+            <input type="text" id="huisnummer" name="huisnummer" placeholder="5A" autocomplete="address-line1">
+          </div>
+        </div>
+        <div style="margin-top: 8px;">
+          <button type="button" class="btn-primary" id="btnLookup">
+            <span id="lookupText">Adres opzoeken</span>
+            <span id="lookupSpinner" style="display:none;" class="spinner"></span>
+          </button>
+        </div>
+        <div id="adresResult"></div>
+        <div id="adresError"></div>
+
+        <!-- Manual entry fallback (shown when address not found) -->
+        <div id="manualEntry" style="display:none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line);">
+          <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 12px;">Vul je gegevens handmatig in:</p>
+          <div class="form-row">
+            <div class="field"><label>Straat</label><input type="text" name="straat"></div>
+            <div class="field"><label>Plaats</label><input type="text" name="plaats"></div>
+          </div>
+        </div>
+
+        <!-- m² field -->
+        <div id="m2Section" style="display:none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line);">
+          <div class="field">
+            <label for="m2">Aantal m² vloerverwarming</label>
+            <input type="number" id="m2" name="m2" min="5" max="500" placeholder="bijv. 80">
+            <div class="hint" id="m2Hint">Meestal ~85% van je woonoppervlak — niet elke ruimte krijgt vloerverwarming.</div>
+          </div>
+          <div style="margin-top: 16px;">
+            <button type="button" class="btn-primary" id="btnStep1Next" disabled>Volgende: kies systeem →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ STAP 2: SYSTEEM ============ -->
+      <div class="tool-panel" id="panel2" style="display:none;">
+        <div class="panel-header">
+          <div class="panel-title"><span class="panel-num">2.</span> Welk systeem past bij jouw situatie?</div>
+        </div>
+        <div class="field" style="margin-bottom: 16px;">
+          <label for="huidigeVloer">Wat ligt er nu voor vloer? (helpt ons met advies)</label>
+          <select id="huidigeVloer" name="huidigeVloer">
+            <option value="">— Kies of vul in bij systeem</option>
+            <option value="beton-dekvloer">Beton / dekvloer</option>
+            <option value="houten-vloer">Houten vloer / balklaag</option>
+            <option value="nieuwbouw">Nieuwbouw (nog geen vloer)</option>
+            <option value="tegels">Tegels (bv. badkamer)</option>
+            <option value="laminaat-parket">Laminaat / parket</option>
+            <option value="anders">Anders / weet ik niet</option>
+          </select>
+        </div>
+
+        <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin-bottom: 6px; display: block;">Systeem</label>
+        <div class="systemen" id="systemen">
+          <label class="systeem-card" data-systeem="watergedragen-nat">
+            <input type="radio" name="systeem" value="watergedragen-nat">
+            <div class="naam">Watergedragen — nat</div>
+            <div class="prijs">€30 — €50 /m²</div>
+            <div class="beschrijving">Voor nieuwbouw of verbouwing waar de dekvloer nog gestort wordt.</div>
+          </label>
+          <label class="systeem-card" data-systeem="watergedragen-droog">
+            <input type="radio" name="systeem" value="watergedragen-droog">
+            <div class="naam">Watergedragen — droogbouw</div>
+            <div class="prijs">€35 — €65 /m²</div>
+            <div class="beschrijving">Voor renovatie zonder de vloer open te breken.</div>
+          </label>
+          <label class="systeem-card" data-systeem="watergedragen-frezen">
+            <input type="radio" name="systeem" value="watergedragen-frezen">
+            <div class="naam">Watergedragen — infrezen</div>
+            <div class="prijs">€30 — €45 /m²</div>
+            <div class="beschrijving">In een bestaande dekvloer, snel en zonder sloop.</div>
+          </label>
+          <label class="systeem-card" data-systeem="elektrisch-tegels">
+            <input type="radio" name="systeem" value="elektrisch-tegels">
+            <div class="naam">Elektrisch — matten</div>
+            <div class="prijs">€60 — €70 /m²</div>
+            <div class="beschrijving">Voor badkamer of keuken, onder tegels.</div>
+          </label>
+          <label class="systeem-card" data-systeem="elektrisch-folie">
+            <input type="radio" name="systeem" value="elektrisch-folie">
+            <div class="naam">Elektrisch — folie</div>
+            <div class="prijs">€50 — €75 /m²</div>
+            <div class="beschrijving">Dun infrarood-folie onder laminaat of parket.</div>
+          </label>
+        </div>
+
+        <!-- Frezen-specific extra options -->
+        <div class="frezen-opties" id="frezenOpties" style="display:none;">
+          <label style="font-weight:500; display:block; margin-bottom:8px;">Meerprijs voor dichtsmeren/egaliseren van sleuven</label>
+          <div style="font-size:13px; color: var(--ink-soft); margin-bottom:10px;">Dit hangt af van de staat van je vloer. Wij bepalen dit bij de intake — kies je beste inschatting:</div>
+          <select name="frezenLaagdikte">
+            <option value="1mm">Tot 1 mm — €4/m² (nette, vlakke vloer)</option>
+            <option value="2mm" selected>Tot 2 mm — €7/m² (meestal)</option>
+            <option value="meer">Meer dan 2 mm — €14/m² (oude, oneffen vloer)</option>
+          </select>
+        </div>
+
+        <!-- Live price display -->
+        <div id="prijsLive" style="display:none;">
+          <div class="prijs-live">
+            <div class="kop">Richtprijs</div>
+            <div class="bedrag" id="prijsBedrag">—</div>
+            <div class="detail" id="prijsDetail"></div>
+            <div class="disclaimer">Indicatie op basis van je invoer. Definitieve prijs na intake — elke situatie is anders.</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <button type="button" class="btn-secondary" id="btnStep2Back">← Terug</button>
+          <button type="button" class="btn-primary" id="btnStep2Next" disabled>Volgende: contactgegevens →</button>
+        </div>
+      </div>
+
+      <!-- ============ STAP 3: CONTACT ============ -->
+      <div class="tool-panel" id="panel3" style="display:none;">
+        <div class="panel-header">
+          <div class="panel-title"><span class="panel-num">3.</span> Waar kunnen we je bereiken?</div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="naam">Naam *</label><input type="text" id="naam" name="naam" required autocomplete="name"></div>
+          <div class="field"><label for="telefoon">Telefoon *</label><input type="tel" id="telefoon" name="telefoon" required autocomplete="tel"></div>
+        </div>
+        <div class="field" style="margin-bottom: 16px;"><label for="email">E-mail *</label><input type="email" id="email" name="email" required autocomplete="email"></div>
+        <div class="field" style="margin-bottom: 20px;">
+          <label for="aanvullend">Aanvullende informatie</label>
+          <textarea id="aanvullend" name="aanvullend" rows="3" placeholder="Bijv. gewenste opleverdatum, warmtebron (cv-ketel/warmtepomp), speciale wensen..."></textarea>
+        </div>
+        <label class="consent" style="display:flex; gap:10px; align-items:flex-start; margin-bottom: 16px; font-size: 14px; color: var(--ink-soft); line-height: 1.5;">
+          <input type="checkbox" required style="margin-top: 3px;">
+          <span>Ik ga akkoord met de <a href="privacy.html" style="color: var(--terracotta);">privacyverklaring</a>. Mijn gegevens worden alleen gebruikt om contact op te nemen over deze aanvraag.</span>
+        </label>
+        <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITEKEY" data-theme="light" style="margin: 16px 0;"></div>
+        <div style="margin-top: 16px;">
+          <button type="button" class="btn-secondary" id="btnStep3Back">← Terug</button>
+          <button type="submit" class="btn-primary" id="btnSubmit">
+            <span id="submitText">Vraag definitieve offerte aan</span>
+            <span id="submitSpinner" style="display:none;" class="spinner"></span>
+          </button>
+        </div>
+        <div id="submitError"></div>
+      </div>
+    </form>
+
+    <!-- Success message -->
+    <div class="success-msg" id="successMsg" style="display:none;">
+      <div class="checkmark">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M8 15l5 5 10-10" stroke="#F4ECE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2>Bedankt! We hebben je aanvraag ontvangen.</h2>
+      <p>Je krijgt zo een e-mail met de richtprijs. <strong>Binnen 2 werkdagen</strong> nemen we persoonlijk contact op met een definitieve offerte op maat.</p>
+      <p style="margin-top: 16px; font-size: 14px;">Vragen? Bel gerust <a href="tel:+31646150160" style="color: var(--terracotta);">06-46150160</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="logo-icon-terracotta.svg" alt="">
+          <span class="wordmark">mijnwarmevloer<span class="tld">.nl</span></span>
+        </a>
+        <p class="footer-tagline">Vakkundige aanleg van vloerverwarming voor renovatie en nieuwbouw. Door heel Nederland.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Bedrijf</h5>
+        <ul>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="index.html#werkwijze">Werkwijze</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+31646150160">06-46150160</a></li>
+          <li><a href="mailto:hallo@mijnwarmevloer.nl">hallo@mijnwarmevloer.nl</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 mijnwarmevloer.nl — een handelsnaam van Creditline BV · KvK 59683198 · BTW NL853603108B01</div>
+      <div><a href="privacy.html">Privacy</a> · <a href="voorwaarden.html">Algemene voorwaarden</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// === PRICING TABLE (moet identiek zijn aan server.js) ===
+const PRICING = {
+  'watergedragen-nat':    { label: 'Watergedragen — nat systeem (nieuwbouw)', min: 30, max: 50 },
+  'watergedragen-droog':  { label: 'Watergedragen — droogbouw (renovatie)',   min: 35, max: 65 },
+  'watergedragen-frezen': { label: 'Watergedragen — infrezen in bestaande vloer', min: 30, max: 45 },
+  'elektrisch-tegels':    { label: 'Elektrisch — matten onder tegels',        min: 60, max: 70 },
+  'elektrisch-folie':     { label: 'Elektrisch — foliesysteem onder laminaat', min: 50, max: 75 },
+};
+const FREZEN_MEERPRIJS = { '1mm': 4, '2mm': 7, 'meer': 14 };
+const eurFmt = (n) => '€' + Math.round(n).toLocaleString('nl-NL');
+
+// === STATE ===
+let state = { m2: null, systeem: null, frezenLaagdikte: '2mm' };
+
+// === Fetch form token on load ===
+window.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const r = await fetch('/api/form-token');
+    const data = await r.json();
+    document.getElementById('_formToken').value = data.token || '';
+  } catch (e) {}
+});
+
+// === STAP 1: ADRES OPZOEKEN ===
+const btnLookup = document.getElementById('btnLookup');
+btnLookup.addEventListener('click', async () => {
+  const pc = document.getElementById('postcode').value.trim();
+  const hn = document.getElementById('huisnummer').value.trim();
+  if (!pc || !hn) {
+    document.getElementById('adresError').innerHTML = '<div class="error-msg">Vul postcode en huisnummer in.</div>';
+    return;
+  }
+  document.getElementById('adresError').innerHTML = '';
+  document.getElementById('lookupText').style.display = 'none';
+  document.getElementById('lookupSpinner').style.display = 'inline-block';
+  btnLookup.disabled = true;
+
+  try {
+    const r = await fetch('/api/adres-lookup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ postcode: pc, huisnummer: hn }),
+    });
+    const data = await r.json();
+
+    if (data.ok) {
+      const opp = data.oppervlakteBag;
+      const suggestie = data.verwarmbaarSuggestie;
+      const straat = data.adres.straat + ' ' + data.adres.huisnummer;
+      // Add to hidden fields for submission
+      addOrSetInput('straat', data.adres.straat);
+      addOrSetInput('plaats', data.adres.plaats);
+      // Show result
+      document.getElementById('adresResult').innerHTML = `
+        <div class="adres-result">
+          <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-6.5 8-13a8 8 0 10-16 0c0 6.5 8 13 8 13z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="3" stroke="currentColor" stroke-width="2"/></svg>
+          <div>
+            <div class="adres">${data.adres.weergavenaam}</div>
+            <div class="oppervlakte">${opp ? `Gebruiksoppervlakte volgens BAG: <strong>${opp} m²</strong>` : 'Oppervlakte niet gevonden — vul zelf in'}</div>
+          </div>
+        </div>
+      `;
+      // Pre-fill m² field if we have data
+      if (suggestie) {
+        document.getElementById('m2').value = suggestie;
+        document.getElementById('m2Hint').innerHTML = `Suggestie: <strong>${suggestie} m²</strong> (85% van ${opp} m² totaal — pas aan indien nodig).`;
+        state.m2 = suggestie;
+      }
+      // Show m² section
+      document.getElementById('m2Section').style.display = 'block';
+      document.getElementById('btnStep1Next').disabled = !state.m2;
+    } else if (data.notFound) {
+      document.getElementById('adresError').innerHTML = `<div class="error-msg">${data.error}</div>`;
+      document.getElementById('manualEntry').style.display = 'block';
+      document.getElementById('m2Section').style.display = 'block';
+    } else {
+      document.getElementById('adresError').innerHTML = `<div class="error-msg">${data.error || 'Er ging iets mis. Vul handmatig in.'}</div>`;
+      document.getElementById('manualEntry').style.display = 'block';
+      document.getElementById('m2Section').style.display = 'block';
+    }
+  } catch (err) {
+    document.getElementById('adresError').innerHTML = '<div class="error-msg">Kan de adresservice niet bereiken. Vul hieronder handmatig in.</div>';
+    document.getElementById('manualEntry').style.display = 'block';
+    document.getElementById('m2Section').style.display = 'block';
+  } finally {
+    document.getElementById('lookupText').style.display = 'inline';
+    document.getElementById('lookupSpinner').style.display = 'none';
+    btnLookup.disabled = false;
+  }
+});
+
+// Helper to add or set hidden inputs
+function addOrSetInput(name, value) {
+  let el = document.querySelector(`input[name="${name}"]`);
+  if (!el) {
+    el = document.createElement('input');
+    el.type = 'hidden'; el.name = name;
+    document.getElementById('toolForm').appendChild(el);
+  }
+  el.value = value || '';
+}
+
+// m² input handler
+document.getElementById('m2').addEventListener('input', (e) => {
+  const val = parseInt(e.target.value, 10);
+  state.m2 = (val >= 5 && val <= 500) ? val : null;
+  document.getElementById('btnStep1Next').disabled = !state.m2;
+});
+
+// Step 1 → 2
+document.getElementById('btnStep1Next').addEventListener('click', () => goToStep(2));
+
+// === STAP 2: SYSTEEM ===
+document.querySelectorAll('.systeem-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.systeem-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    card.querySelector('input').checked = true;
+    state.systeem = card.dataset.systeem;
+    document.getElementById('frezenOpties').style.display = state.systeem === 'watergedragen-frezen' ? 'block' : 'none';
+    updateLivePrice();
+    document.getElementById('btnStep2Next').disabled = false;
+  });
+});
+document.querySelector('select[name="frezenLaagdikte"]').addEventListener('change', (e) => {
+  state.frezenLaagdikte = e.target.value;
+  updateLivePrice();
+});
+
+function updateLivePrice() {
+  if (!state.systeem || !state.m2) return;
+  const p = PRICING[state.systeem];
+  let base_min = p.min * state.m2;
+  let base_max = p.max * state.m2;
+  let extra = 0;
+  if (state.systeem === 'watergedragen-frezen') {
+    extra = FREZEN_MEERPRIJS[state.frezenLaagdikte] * state.m2;
+  }
+  const min = Math.round((base_min + extra) / 50) * 50;
+  const max = Math.round((base_max + extra) / 50) * 50;
+  document.getElementById('prijsBedrag').textContent = `${eurFmt(min)} — ${eurFmt(max)}`;
+  document.getElementById('prijsDetail').innerHTML = `${state.m2} m² × €${p.min}—€${p.max}/m² incl. btw${extra ? ` <br>+ €${extra} meerprijs frezen` : ''}`;
+  document.getElementById('prijsLive').style.display = 'block';
+}
+
+document.getElementById('btnStep2Back').addEventListener('click', () => goToStep(1));
+document.getElementById('btnStep2Next').addEventListener('click', () => goToStep(3));
+
+// === STAP 3: BACK ===
+document.getElementById('btnStep3Back').addEventListener('click', () => goToStep(2));
+
+// === STEP NAVIGATION ===
+function goToStep(n) {
+  for (let i = 1; i <= 3; i++) {
+    document.getElementById('panel' + i).style.display = i === n ? 'block' : 'none';
+    const dot = document.getElementById('stepDot' + i);
+    dot.classList.toggle('active', i === n);
+    dot.classList.toggle('done', i < n);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// === SUBMIT ===
+document.getElementById('toolForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const submitBtn = document.getElementById('btnSubmit');
+  document.getElementById('submitText').style.display = 'none';
+  document.getElementById('submitSpinner').style.display = 'inline-block';
+  submitBtn.disabled = true;
+  document.getElementById('submitError').innerHTML = '';
+
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  try {
+    const r = await fetch('/api/tool-offerte', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const result = await r.json();
+    if (r.ok && result.ok) {
+      form.style.display = 'none';
+      document.querySelector('.steps').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      document.getElementById('submitError').innerHTML = `<div class="error-msg">${result.error || 'Er ging iets mis. Probeer het opnieuw of bel 06-46150160.'}</div>`;
+    }
+  } catch (err) {
+    document.getElementById('submitError').innerHTML = '<div class="error-msg">Verbindingsfout. Probeer het opnieuw of bel 06-46150160.</div>';
+  } finally {
+    document.getElementById('submitText').style.display = 'inline';
+    document.getElementById('submitSpinner').style.display = 'none';
+    submitBtn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

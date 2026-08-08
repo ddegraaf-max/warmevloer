@@ -26,6 +26,8 @@
 <!-- ============ ANALYTICS ============ -->
 <!-- 100% privacy-first analytics (Simple Analytics) — geen cookies, geen cookiebanner nodig -->
 <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<!-- Cloudflare Turnstile (anti-spam, vrijwel onzichtbaar) -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade"></noscript>
 <!-- ============ END SEO & SOCIAL ============ -->
 
@@ -143,7 +145,8 @@ select {
     <ul class="nav-menu" id="navMenu">
       <li><a href="index.html">Home</a></li>
       <li><a href="faq.html">Veelgestelde vragen</a></li>
-      <li><a href="contact.html" class="nav-cta">Offerte aanvragen</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="offerte-tool.html" class="nav-cta">Bereken je prijs</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -173,8 +176,15 @@ select {
               action="/api/offerte"
               method="POST"
               onsubmit="return handleSubmit(event)">
-          <!-- Anti-spam honeypot: bots vullen dit verborgen veld in -->
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <!-- Anti-spam honeypots: bots vullen deze verborgen velden in, echte gebruikers nooit -->
+          <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+            <label>Laat dit veld leeg <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+            <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+            <label>URL <input type="text" name="url" tabindex="-1" autocomplete="off"></label>
+            <label>Tweede telefoonnummer <input type="text" name="phone_number_2" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <!-- Form-token: wordt na pagina-laad gevuld via JavaScript -->
+          <input type="hidden" name="_formToken" id="_formToken" value="">
           <div class="form-row">
             <div class="field">
               <label for="naam">Naam <span class="req">*</span></label>
@@ -244,6 +254,9 @@ select {
             <input type="checkbox" required>
             <span>Ik ga akkoord met de <a href="privacy.html" style="color: var(--terracotta);">privacyverklaring</a>. We gebruiken je gegevens alleen om contact op te nemen over deze aanvraag.</span>
           </label>
+
+          <!-- Cloudflare Turnstile: vrijwel altijd onzichtbaar voor echte gebruikers -->
+          <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITEKEY" data-theme="light" style="margin: 16px 0;"></div>
 
           <div class="submit-row">
             <button type="submit" class="btn-primary">
@@ -342,6 +355,19 @@ select {
 
 <script src="script.js"></script>
 <script>
+// Bij paginalaad: haal een vers form-token op (anti-spam laag 3).
+// Dit gebeurt async — geen wachten voor de gebruiker.
+window.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const r = await fetch('/api/form-token');
+    const data = await r.json();
+    const field = document.getElementById('_formToken');
+    if (field && data.token) field.value = data.token;
+  } catch (err) {
+    // Stil falen — als het token er niet is wordt het formulier afgewezen, dat is OK.
+  }
+});
+
 async function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -352,7 +378,7 @@ async function handleSubmit(e) {
   submitBtn.disabled = true;
   submitBtn.innerHTML = 'Bezig met verzenden...';
 
-  // Verzamel alle velden als JSON
+  // Verzamel alle velden als JSON (FormData pakt automatisch ook het Turnstile-token op via name="cf-turnstile-response")
   const data = Object.fromEntries(new FormData(form).entries());
 
   try {
@@ -368,6 +394,10 @@ async function handleSubmit(e) {
       msg.classList.add('show');
       msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
       form.reset();
+      // Reset Turnstile zodat een volgende inzending opnieuw een challenge krijgt
+      if (window.turnstile) {
+        try { window.turnstile.reset(); } catch (e) {}
+      }
     } else {
       alert(result.error || 'Er ging iets mis. Bel ons gerust op 06-46150160.');
     }
