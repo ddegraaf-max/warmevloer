@@ -97,7 +97,31 @@ Spam-pogingen zie je in de Railway Deploy Logs (regels die beginnen met `[spam]`
 
 ---
 
-## 💻 Lokaal draaien
+## 🏷️ Versionering
+
+Elke deploy heeft een versienummer. Zo weet je zeker of Railway je nieuwe versie draait.
+
+**Waar je het versienummer ziet:**
+- **Footer van elke pagina** — rechts naast de copyright, klein: `· v1.1.0`
+- **HTML-broncode** — bovenaan: `<!-- mijnwarmevloer.nl — versie X.Y.Z — build ... -->` (rechtermuisknop → "Paginabron")
+- **URL `/version`** — bezoek `mijnwarmevloer-production.up.railway.app/version` → JSON met versie + build-tijd
+- **HTTP-header `X-App-Version`** — zichtbaar in DevTools → Network → response headers
+- **Railway logs** — bij server-start: `🏷️  mijnwarmevloer.nl versie X.Y.Z — build ...`
+
+**Versie verhogen bij elke wijziging:**
+1. Open `package.json`
+2. Verander `"version": "1.1.0"` naar bv. `"version": "1.1.1"` (patch: kleine fix) of `"1.2.0"` (minor: nieuwe feature) of `"2.0.0"` (major: grote wijziging)
+3. Commit → Railway redeployt → nieuwe versie zichtbaar in de footer
+
+**Semantic versioning (aanbevolen):**
+- `MAJOR.MINOR.PATCH` (bv. `1.2.3`)
+- `PATCH` (+1) — bug fix, kleine tekstwijziging
+- `MINOR` (+1) — nieuwe feature, extra pagina
+- `MAJOR` (+1) — nieuw ontwerp, grote restructurering
+
+---
+
+
 ```bash
 npm install
 RESEND_API_KEY=re_xxxx MAIL_TO=jij@voorbeeld.nl npm start

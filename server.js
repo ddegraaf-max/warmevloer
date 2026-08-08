@@ -15,6 +15,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+// ---- Versienummer (uit package.json) ----
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8'));
+const APP_VERSION = pkg.version;
+const BUILD_TIME = new Date().toISOString();
+console.log(`🏷️  mijnwarmevloer.nl versie ${APP_VERSION} — build ${BUILD_TIME}`);
+
 // ---- Configuratie ----
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const MAIL_TO = process.env.MAIL_TO || 'hallo@mijnwarmevloer.nl';
@@ -35,6 +41,18 @@ const resend = new Resend(RESEND_API_KEY);
 // ---- Middleware ----
 app.use(express.json({ limit: '10kb' }));        // beperk payload-grootte
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+
+// Zet op alle responses een X-App-Version header — handig om via DevTools te checken
+app.use((req, res, next) => {
+  res.set('X-App-Version', APP_VERSION);
+  next();
+});
+
+// ---- Version endpoint (voor snelle check: bezoek /version) ----
+app.get(['/version', '/api/version'], (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  res.json({ version: APP_VERSION, build: BUILD_TIME });
+});
 
 // ---- 301-redirect voor verwijderde pagina ----
 app.get(['/projecten', '/projecten.html'], (req, res) => {
@@ -519,6 +537,21 @@ const PUBLIC_DIR = fs.existsSync(path.join(__dirname, 'public', 'index.html'))
   ? path.join(__dirname, 'public')
   : __dirname;
 console.log(`📁 Website-bestanden uit: ${PUBLIC_DIR}`);
+
+// Vervang {{VERSION}} in HTML-bestanden door het echte versienummer.
+// Voor statische assets (css/js/img) doen we niets — alleen HTML wordt aangepast.
+app.get(/\.html$|\/$/, (req, res, next) => {
+  const urlPath = req.path === '/' ? '/index.html' : req.path;
+  const filePath = path.join(PUBLIC_DIR, urlPath);
+  fs.readFile(filePath, 'utf8', (err, html) => {
+    if (err) return next();  // bestand niet gevonden → laat static handler het afhandelen
+    const rendered = html
+      .replace(/\{\{VERSION\}\}/g, APP_VERSION)
+      .replace(/\{\{BUILD_TIME\}\}/g, BUILD_TIME);
+    res.set('Content-Type', 'text/html; charset=utf-8');
+    res.send(rendered);
+  });
+});
 
 app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
 app.use((req, res) => {

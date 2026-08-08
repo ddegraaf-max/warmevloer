@@ -180,6 +180,7 @@ footer { background: var(--ink); color: var(--cream); padding: 80px 0 32px; }
   opacity: 0.5;
 }
 .footer-bottom a { color: var(--cream); opacity: 1; text-decoration: none; }
+.version-tag { opacity: 0.55; font-variant-numeric: tabular-nums; margin-left: 4px; }
 
 /* ===== ANIMATIONS ===== */
 /* Default: content always visible. JS-enabled = animate in. */
