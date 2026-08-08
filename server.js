@@ -288,32 +288,45 @@ app.post('/api/adres-lookup', async (req, res) => {
     const adresseerbaarObjectId = doc.adresseerbaarobject_id;
     console.log(`[lookup] adres: ${doc.weergavenaam} — adresseerbaarobject_id=${adresseerbaarObjectId}`);
 
-    // Stap 2: oppervlakte ophalen via BAG OGC API Features (gratis, geen key)
-    // De adresseerbaarobject_id is het identificatienummer van het verblijfsobject.
+    // Stap 2: oppervlakte ophalen via BAG OGC API Features v2 (gratis, geen key)
+    // Correcte URL: /kadaster/bag/ogc/v2 (de /lv/bag/ogc/v1 is per 15 juli 2026 uitgefaseerd)
     let oppervlakte = null;
     if (adresseerbaarObjectId) {
-      try {
-        const bagUrl = `https://api.pdok.nl/lv/bag/ogc/v1/collections/verblijfsobject/items?identificatie=${encodeURIComponent(adresseerbaarObjectId)}&f=json&limit=1`;
-        console.log(`[lookup] BAG OGC → ${bagUrl}`);
-        const bagRes = await fetch(bagUrl, { headers: { 'Accept': 'application/json' } });
-        console.log(`[lookup] BAG OGC status: ${bagRes.status}`);
-        if (bagRes.ok) {
+      // Twee query-strategieën proberen: eerst de simpele filter-parameter,
+      // dan CQL2 als die 404/400 geeft. Beide zijn OGC API Features-standaard.
+      const tryUrls = [
+        `https://api.pdok.nl/kadaster/bag/ogc/v2/collections/verblijfsobject/items?identificatie=${encodeURIComponent(adresseerbaarObjectId)}&f=json&limit=1`,
+        `https://api.pdok.nl/kadaster/bag/ogc/v2/collections/verblijfsobject/items?filter=${encodeURIComponent(`identificatie='${adresseerbaarObjectId}'`)}&f=json&limit=1`,
+      ];
+      for (const bagUrl of tryUrls) {
+        try {
+          console.log(`[lookup] BAG OGC → ${bagUrl}`);
+          const bagRes = await fetch(bagUrl, { headers: { 'Accept': 'application/geo+json, application/json' } });
+          console.log(`[lookup] BAG OGC status: ${bagRes.status}`);
+          if (!bagRes.ok) {
+            const text = await bagRes.text();
+            console.warn(`[lookup] response body (eerste 200 chars): ${text.slice(0, 200)}`);
+            continue;  // probeer volgende URL
+          }
           const bagData = await bagRes.json();
+          console.log(`[lookup] features gevonden: ${bagData?.features?.length || 0}`);
           const feature = bagData?.features?.[0];
-          const props = feature?.properties || {};
-          // Verschillende BAG-varianten kunnen dit veld anders noemen
+          if (!feature) continue;
+          const props = feature.properties || {};
+          console.log(`[lookup] beschikbare velden: ${Object.keys(props).join(', ')}`);
           oppervlakte = props.oppervlakte
                       || props.gebruiksoppervlakte
                       || props.oppervlakte_verblijfsobject
                       || null;
-          console.log(`[lookup] oppervlakte: ${oppervlakte} m² (props: ${Object.keys(props).join(',')})`);
-        } else {
-          const text = await bagRes.text();
-          console.warn(`[lookup] BAG OGC faalde: ${bagRes.status} — ${text.slice(0, 200)}`);
+          if (oppervlakte) {
+            console.log(`[lookup] ✅ oppervlakte gevonden: ${oppervlakte} m²`);
+            break;
+          }
+        } catch (e) {
+          console.warn(`[lookup] BAG-call fout: ${e.message}`);
         }
-      } catch (e) {
-        console.warn('[lookup] BAG-call fout:', e.message);
       }
+      if (!oppervlakte) console.log(`[lookup] geen oppervlakte in BAG-response`);
     }
 
     return res.json({
